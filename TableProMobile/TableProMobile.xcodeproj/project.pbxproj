@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5AD1F2002FB5500000000002 /* FreeTDSConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD1F2002FB5500000000001 /* FreeTDSConnection.swift */; };
 		5A72D6232F97A69500E2ADE0 /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 5A72D6222F97A69500E2ADE0 /* Secrets.xcconfig */; };
 		5A7E81B12F95F23600EEF236 /* TableProAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5A87EEED2F7F893000D028D1 /* TableProAnalytics */; };
 		5A87EEED2F7F893000D028D0 /* TableProSync in Frameworks */ = {isa = PBXBuildFile; productRef = 5A87EEEC2F7F893000D028D0 /* TableProSync */; };
@@ -27,6 +26,7 @@
 		5AB9F3EF2F7C1D03001F3337 /* TableProQuery in Frameworks */ = {isa = PBXBuildFile; productRef = 5AB9F3EE2F7C1D03001F3337 /* TableProQuery */; };
 		5AD1F1B62FB4455700296783 /* TableProMSSQLCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5AD1F1B52FB4455700296783 /* TableProMSSQLCore */; };
 		5AD1F1B82FB4456900296783 /* FreeTDS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD1F1B72FB4456900296783 /* FreeTDS.xcframework */; };
+		5AD1F2002FB5500000000002 /* FreeTDSConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD1F2002FB5500000000001 /* FreeTDSConnection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5AD1F2002FB5500000000001 /* FreeTDSConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FreeTDSConnection.swift; path = ../Plugins/MSSQLDriverPlugin/FreeTDSConnection.swift; sourceTree = "<group>"; };
 		5A72D6222F97A69500E2ADE0 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		5A87ECDD2F7F88F200D028D0 /* AIPromptTemplates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPromptTemplates.swift; sourceTree = "<group>"; };
 		5A87ECDE2F7F88F200D028D0 /* AIPromptTemplates+InlineSuggest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AIPromptTemplates+InlineSuggest.swift"; sourceTree = "<group>"; };
@@ -531,6 +530,7 @@
 		5AB9F3D92F7C1C12001F3337 /* TableProMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableProMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AC8A8F82FAFC99F005DE2A3 /* TableProMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableProMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD1F1B72FB4456900296783 /* FreeTDS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FreeTDS.xcframework; path = ../Libs/ios/FreeTDS.xcframework; sourceTree = "<group>"; };
+		5AD1F2002FB5500000000001 /* FreeTDSConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FreeTDSConnection.swift; path = ../Plugins/MSSQLDriverPlugin/FreeTDSConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -1661,6 +1661,7 @@
 				5AA313332F7EA5B4008EBA97 /* Frameworks */,
 				5AB9F3DA2F7C1C12001F3337 /* Products */,
 				5A72D6222F97A69500E2ADE0 /* Secrets.xcconfig */,
+				5ABBE0152FB5554100A78382 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1672,6 +1673,14 @@
 				5AC8A8F82FAFC99F005DE2A3 /* TableProMobileTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5ABBE0152FB5554100A78382 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				5AD1F2002FB5500000000001 /* FreeTDSConnection.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1870,7 +1879,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = TableProWidgetExtension.entitlements;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableProWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TableProWidget;
@@ -1901,7 +1910,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = TableProWidgetExtension.entitlements;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableProWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TableProWidget;
@@ -2058,7 +2067,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = TableProMobile/TableProMobileRelease.entitlements;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableProMobile/Info.plist;
@@ -2100,7 +2109,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = TableProMobile/TableProMobileRelease.entitlements;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TableProMobile/Info.plist;
