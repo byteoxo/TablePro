@@ -399,7 +399,7 @@ struct ExportDialog: View {
                 }
             }
             .buttonStyle(.borderedProminent)
-            .keyboardShortcut(.return, modifiers: [])
+            .keyboardShortcut(.defaultAction)
             .disabled(isExportDisabled)
         }
         .padding(.horizontal, 16)

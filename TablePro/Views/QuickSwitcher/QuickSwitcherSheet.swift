@@ -189,6 +189,7 @@ struct QuickSwitcherSheet: View {
             Button("Cancel") {
                 dismiss()
             }
+            .keyboardShortcut(.cancelAction)
 
             Spacer()
 
@@ -197,7 +198,7 @@ struct QuickSwitcherSheet: View {
             }
             .buttonStyle(.borderedProminent)
             .disabled(viewModel.selectedItemId == nil)
-            .keyboardShortcut(.return, modifiers: [])
+            .keyboardShortcut(.defaultAction)
         }
         .padding(12)
     }

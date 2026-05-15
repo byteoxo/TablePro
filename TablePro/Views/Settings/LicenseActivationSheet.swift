@@ -61,7 +61,7 @@ struct LicenseActivationSheet: View {
                         Task { await activate() }
                     }
                     .buttonStyle(.borderedProminent)
-                    .keyboardShortcut(.return, modifiers: [])
+                    .keyboardShortcut(.defaultAction)
                     .disabled(licenseKeyInput.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
 
@@ -72,6 +72,7 @@ struct LicenseActivationSheet: View {
                     Button("Cancel") {
                         dismiss()
                     }
+                    .keyboardShortcut(.cancelAction)
                     .keyboardShortcut(.cancelAction)
                 }
             }

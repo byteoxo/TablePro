@@ -148,6 +148,7 @@ struct TableOperationDialog: View {
                 Button("Cancel") {
                     isPresented = false
                 }
+                .keyboardShortcut(.cancelAction)
 
                 Spacer()
 
@@ -158,7 +159,7 @@ struct TableOperationDialog: View {
                     confirmAndDismiss()
                 }
                 .buttonStyle(.borderedProminent)
-                .keyboardShortcut(.return, modifiers: [])
+                .keyboardShortcut(.defaultAction)
             }
             .padding(12)
         }

@@ -76,7 +76,7 @@ struct TerminalTabContentView: View {
             } label: {
                 Label("Reconnect", systemImage: "arrow.clockwise")
             }
-            .keyboardShortcut(.return, modifiers: [])
+            .keyboardShortcut(.defaultAction)
         }
     }
 

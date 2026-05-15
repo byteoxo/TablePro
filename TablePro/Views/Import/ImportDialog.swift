@@ -275,6 +275,7 @@ struct ImportDialog: View {
             Button("Cancel") {
                 isPresented = false
             }
+            .keyboardShortcut(.cancelAction)
 
             Spacer()
 
@@ -283,7 +284,7 @@ struct ImportDialog: View {
             }
             .buttonStyle(.borderedProminent)
             .disabled(fileURL == nil || (importService?.state.isImporting ?? false) || availableFormats.isEmpty || hasPreviewError)
-            .keyboardShortcut(.return, modifiers: [])
+            .keyboardShortcut(.defaultAction)
         }
         .padding(16)
     }
