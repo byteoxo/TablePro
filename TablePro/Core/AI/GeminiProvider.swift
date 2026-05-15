@@ -184,7 +184,8 @@ final class GeminiProvider: ChatTransport {
                     "name": tool.name,
                     "description": tool.description
                 ]
-                entry["parameters"] = try tool.inputSchema.jsonObject()
+                let sanitized = Self.sanitizeSchemaForGemini(tool.inputSchema)
+                entry["parameters"] = try sanitized.jsonObject()
                 return entry
             }
             body["tools"] = [["functionDeclarations": declarations]]
@@ -219,12 +220,16 @@ final class GeminiProvider: ChatTransport {
                 continue
             case .toolUse(let useBlock):
                 let argsObject = (try? useBlock.input.jsonObject()) ?? [String: Any]()
-                parts.append([
+                var partEntry: [String: Any] = [
                     "functionCall": [
                         "name": useBlock.name,
                         "args": argsObject
                     ]
-                ])
+                ]
+                if let signature = useBlock.providerMetadata?["thoughtSignature"], !signature.isEmpty {
+                    partEntry["thoughtSignature"] = signature
+                }
+                parts.append(partEntry)
             case .toolResult(let resultBlock):
                 let toolName = resolveToolName(
                     forToolUseId: resultBlock.toolUseId,
@@ -295,7 +300,11 @@ final class GeminiProvider: ChatTransport {
                     let id = idGenerator()
                     let argsObject = functionCall["args"] ?? [String: Any]()
                     let argsString = encodeArgsToJSONString(argsObject)
-                    events.append(.toolUseStart(id: id, name: name))
+                    var metadata: [String: String]?
+                    if let signature = part["thoughtSignature"] as? String, !signature.isEmpty {
+                        metadata = ["thoughtSignature": signature]
+                    }
+                    events.append(.toolUseStart(id: id, name: name, providerMetadata: metadata))
                     events.append(.toolUseDelta(id: id, inputJSONDelta: argsString))
                     events.append(.toolUseEnd(id: id))
                 }
@@ -323,6 +332,57 @@ final class GeminiProvider: ChatTransport {
         } catch {
             Self.logger.warning("Gemini functionCall args serialization failed: \(error.localizedDescription, privacy: .public)")
             return "{}"
+        }
+    }
+
+    // MARK: - Schema Sanitization
+
+    /// Strip JSON Schema features Gemini's `function_declarations` API rejects.
+    /// Removes `additionalProperties` keys at any depth. Rewrites optional fields
+    /// expressed as `type: ["X", "null"]` to `type: "X"` plus `nullable: true`,
+    /// which is the form Gemini accepts.
+    static func sanitizeSchemaForGemini(_ schema: JsonValue) -> JsonValue {
+        switch schema {
+        case .object(let fields):
+            var rewritten: [String: JsonValue] = [:]
+            var nullable = false
+
+            for (key, value) in fields {
+                if key == "additionalProperties" {
+                    continue
+                }
+                if key == "type", case .array(let members) = value {
+                    let nonNull = members.compactMap { member -> String? in
+                        if case .string(let typeName) = member, typeName != "null" {
+                            return typeName
+                        }
+                        if case .string("null") = member {
+                            nullable = true
+                            return nil
+                        }
+                        return nil
+                    }
+                    if nonNull.count == 1, let primary = nonNull.first {
+                        rewritten["type"] = .string(primary)
+                    } else {
+                        rewritten["type"] = .array(nonNull.map(JsonValue.string))
+                    }
+                    continue
+                }
+                rewritten[key] = sanitizeSchemaForGemini(value)
+            }
+
+            if nullable {
+                rewritten["nullable"] = .bool(true)
+            }
+
+            return .object(rewritten)
+
+        case .array(let items):
+            return .array(items.map(sanitizeSchemaForGemini))
+
+        default:
+            return schema
         }
     }
 }

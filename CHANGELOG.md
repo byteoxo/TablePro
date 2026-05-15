@@ -27,8 +27,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Drop database now uses the native confirmation dialog instead of a custom sheet.
 - Add competitive tracking docs sourced from top TablePlus issues.
 
+### Security
+
+- AI Chat: destructive operations (DROP, TRUNCATE, ALTER...DROP) now always require user approval before executing. Silent safe-mode and "Always Allow" no longer bypass the confirmation for `confirm_destructive_operation`. Previously an AI could drop tables without the user seeing any prompt when the connection was in Silent mode.
+
 ### Fixed
 
+- AI Chat: Gemini provider now sends tool schemas with `additionalProperties` stripped and optional fields rewritten from `type: [X, null]` to `type: X, nullable: true`, fixing 400 errors when sending a message with tools enabled.
+- AI Chat: Gemini provider now round-trips `thoughtSignature` on function calls, fixing the second-round 400 error after a tool runs.
 - MySQL/MariaDB: `BIT(N)` columns now display as decimal numbers (`0`, `1`, `255`) instead of raw bytes that showed up as control characters like `^A` in the data grid. (#1272)
 - ClickHouse, BigQuery, CloudflareD1, LibSQL, Etcd, and DynamoDB: long-running queries no longer fail at 30 seconds when Settings > Query timeout is set higher. The HTTP transport now uses the configured query timeout plus a 30-second grace, so the server's `max_execution_time` (or equivalent) fires before the client gives up. Setting "No limit" raises the transport ceiling to 1 hour. (#1267)
 - AI Chat: DeepSeek V4 thinking content (`reasoning_content`) is now captured during streaming and passed back in subsequent turns, fixing 400 errors when using deepseek-v4-pro or deepseek-v4-flash.
