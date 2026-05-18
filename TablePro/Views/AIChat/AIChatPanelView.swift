@@ -181,7 +181,7 @@ struct AIChatPanelView: View {
     private func errorBanner(_ message: String) -> some View {
         HStack(spacing: 6) {
             Image(systemName: "exclamationmark.triangle.fill")
-                .foregroundStyle(Color(nsColor: .systemYellow))
+                .foregroundStyle(.yellow)
             Text(message)
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -199,7 +199,7 @@ struct AIChatPanelView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
-        .background(Color(nsColor: .systemYellow).opacity(Self.warningBackgroundOpacity))
+        .background(.yellow.opacity(Self.warningBackgroundOpacity))
     }
 
     // MARK: - Input Area
@@ -311,7 +311,7 @@ struct AIChatPanelView: View {
                 viewModel.cancelStream()
             } label: {
                 Image(systemName: "stop.circle.fill")
-                    .foregroundStyle(Color(nsColor: .systemRed))
+                    .foregroundStyle(.red)
             }
             .buttonStyle(.plain)
             .help(String(localized: "Stop Generating"))

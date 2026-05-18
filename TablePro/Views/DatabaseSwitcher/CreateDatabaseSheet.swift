@@ -111,7 +111,7 @@ struct CreateDatabaseSheet: View {
     private func errorBanner(_ message: String) -> some View {
         HStack(spacing: 8) {
             Image(systemName: "exclamationmark.triangle.fill")
-                .foregroundStyle(Color(nsColor: .systemOrange))
+                .foregroundStyle(.orange)
             Text(message)
                 .font(.callout)
                 .foregroundStyle(.primary)

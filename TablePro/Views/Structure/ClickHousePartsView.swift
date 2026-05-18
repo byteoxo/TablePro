@@ -29,7 +29,7 @@ struct ClickHousePartsView: View {
                 VStack(spacing: 8) {
                     Image(systemName: "exclamationmark.triangle")
                         .font(.largeTitle)
-                        .foregroundStyle(Color(nsColor: .systemOrange))
+                        .foregroundStyle(.orange)
                         .accessibilityHidden(true)
                     Text(error)
                         .foregroundStyle(.secondary)
@@ -101,7 +101,7 @@ struct ClickHousePartsView: View {
                 .width(min: 100, ideal: 160)
             TableColumn("Active") { part in
                 Image(systemName: part.active ? "checkmark.circle.fill" : "xmark.circle")
-                    .foregroundStyle(part.active ? Color(nsColor: .systemGreen) : .secondary)
+                    .foregroundStyle(part.active ? .green : .secondary)
             }
             .width(min: 50, ideal: 60)
         }

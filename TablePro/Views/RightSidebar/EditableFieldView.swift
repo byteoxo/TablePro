@@ -92,7 +92,7 @@ internal struct FieldDetailView: View {
             if isPrimaryKey {
                 Image(systemName: "key.fill")
                     .font(.caption2)
-                    .foregroundStyle(Color(nsColor: .systemYellow))
+                    .foregroundStyle(.yellow)
             } else if isForeignKey {
                 Image(systemName: "arrow.right.arrow.left")
                     .font(.caption2)
@@ -110,10 +110,10 @@ internal struct FieldDetailView: View {
             if isTruncated && !isLoadingFullValue {
                 Text("truncated")
                     .font(.caption2.weight(.medium))
-                    .foregroundStyle(Color(nsColor: .systemOrange))
+                    .foregroundStyle(.orange)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 1)
-                    .background(Color(nsColor: .systemOrange).opacity(0.15))
+                    .background(.orange.opacity(0.15))
                     .clipShape(Capsule())
             }
         }

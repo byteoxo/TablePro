@@ -49,7 +49,7 @@ struct SyncSection: View {
                 LabeledContent(String(localized: "Account:")) {
                     HStack(spacing: 4) {
                         Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(Color(nsColor: .systemGreen))
+                            .foregroundStyle(.green)
                             .font(.caption)
                         Text(String(localized: "iCloud Connected"))
                     }
@@ -62,7 +62,7 @@ struct SyncSection: View {
 
                 Text("Sign in to iCloud in System Settings to enable sync.")
                     .font(.caption)
-                    .foregroundStyle(Color(nsColor: .systemOrange))
+                    .foregroundStyle(.orange)
             }
 
             if let lastSync = syncCoordinator.lastSyncDate {
@@ -85,7 +85,7 @@ struct SyncSection: View {
             if case .error(let error) = syncCoordinator.syncStatus {
                 Text(error.localizedDescription)
                     .font(.caption)
-                    .foregroundStyle(Color(nsColor: .systemRed))
+                    .foregroundStyle(.red)
             }
         }
     }

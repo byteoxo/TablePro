@@ -192,28 +192,28 @@ struct GeneralPaneView: View {
                 String(localized: "~/.pgpass not found"),
                 systemImage: "exclamationmark.triangle.fill"
             )
-            .foregroundStyle(Color(nsColor: .systemYellow))
+            .foregroundStyle(.yellow)
             .font(.caption)
         case .badPermissions:
             Label(
                 String(localized: "~/.pgpass has incorrect permissions (needs chmod 0600)"),
                 systemImage: "exclamationmark.triangle.fill"
             )
-            .foregroundStyle(Color(nsColor: .systemOrange))
+            .foregroundStyle(.orange)
             .font(.caption)
         case .matchFound:
             Label(
                 String(localized: "~/.pgpass found, matching entry exists"),
                 systemImage: "checkmark.circle.fill"
             )
-            .foregroundStyle(Color(nsColor: .systemGreen))
+            .foregroundStyle(.green)
             .font(.caption)
         case .noMatch:
             Label(
                 String(localized: "~/.pgpass found, no matching entry"),
                 systemImage: "exclamationmark.triangle.fill"
             )
-            .foregroundStyle(Color(nsColor: .systemYellow))
+            .foregroundStyle(.yellow)
             .font(.caption)
         }
     }

@@ -34,7 +34,7 @@ struct SlowQueryListView: View {
                 if let error {
                     Label(error, systemImage: "exclamationmark.triangle.fill")
                         .font(.caption)
-                        .foregroundStyle(Color(nsColor: .systemOrange))
+                        .foregroundStyle(.orange)
                 }
             }
         }
@@ -47,7 +47,7 @@ struct SlowQueryListView: View {
             Text(query.duration)
                 .font(.system(.caption, design: .monospaced))
                 .monospacedDigit()
-                .foregroundStyle(Color(nsColor: .systemOrange))
+                .foregroundStyle(.orange)
                 .frame(width: 50, alignment: .trailing)
 
             VStack(alignment: .leading, spacing: 2) {

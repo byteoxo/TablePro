@@ -182,7 +182,7 @@ extension TableStructureView {
                 if showCopyConfirmation {
                     HStack {
                         Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(Color(nsColor: .systemGreen))
+                            .foregroundStyle(.green)
                         Text("Copied!")
                     }
                     .transition(.opacity)

@@ -181,7 +181,7 @@ struct DatabaseSwitcherSheet: View {
         VStack(spacing: 10) {
             Image(systemName: "exclamationmark.triangle")
                 .font(.title3)
-                .foregroundStyle(Color(nsColor: .systemOrange))
+                .foregroundStyle(.orange)
             Text(String(localized: "Failed to load databases"))
                 .font(.callout.weight(.medium))
             Text(message)

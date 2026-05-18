@@ -111,7 +111,7 @@ struct ThemeEditorFontsSection: View {
             set: { onChange($0) }
         )) {
             ForEach(range, id: \.self) { size in
-                Text("\(size) pt").tag(size)
+                Text(verbatim: "\(size) pt").tag(size)
             }
         }
     }

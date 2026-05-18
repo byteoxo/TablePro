@@ -121,7 +121,7 @@ struct BrowsePluginsView: View {
                         .lineLimit(1)
                     if plugin.isVerified {
                         Image(systemName: "checkmark.seal.fill")
-                            .foregroundStyle(Color(nsColor: .systemBlue))
+                            .foregroundStyle(.blue)
                             .font(.caption2)
                     }
                 }
@@ -164,7 +164,7 @@ struct BrowsePluginsView: View {
                             .controlSize(.mini)
                     case .completed:
                         Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(Color(nsColor: .systemGreen))
+                            .foregroundStyle(.green)
                             .font(.caption)
                     case .failed:
                         Button("Retry") { updatePlugin(plugin) }
@@ -191,7 +191,7 @@ struct BrowsePluginsView: View {
                     .controlSize(.mini)
             case .completed:
                 Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(Color(nsColor: .systemGreen))
+                    .foregroundStyle(.green)
                     .font(.caption)
             case .failed:
                 Button("Retry") { installPlugin(plugin) }

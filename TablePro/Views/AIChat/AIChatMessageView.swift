@@ -101,7 +101,7 @@ struct AIChatMessageView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "exclamationmark.circle")
-                            .foregroundStyle(Color(nsColor: .systemRed))
+                            .foregroundStyle(.red)
                         Text("Generation failed.")
                             .foregroundStyle(.secondary)
                         Text("Retry")

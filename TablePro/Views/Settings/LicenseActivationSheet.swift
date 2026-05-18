@@ -45,7 +45,7 @@ struct LicenseActivationSheet: View {
                 if let errorMessage {
                     Label(errorMessage, systemImage: "exclamationmark.triangle.fill")
                         .font(.caption)
-                        .foregroundStyle(Color(nsColor: .systemOrange))
+                        .foregroundStyle(.orange)
                 }
             }
             .padding(.horizontal, 32)

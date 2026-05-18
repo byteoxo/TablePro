@@ -38,20 +38,20 @@ enum TableRowLogic {
     }
 
     static func iconColor(table: TableInfo, isPendingDelete: Bool, isPendingTruncate: Bool) -> Color {
-        if isPendingDelete { return Color(nsColor: .systemRed) }
-        if isPendingTruncate { return Color(nsColor: .systemOrange) }
+        if isPendingDelete { return .red }
+        if isPendingTruncate { return .orange }
         switch table.type {
-        case .table:            return Color(nsColor: .systemBlue)
-        case .view:             return Color(nsColor: .systemPurple)
+        case .table:            return .blue
+        case .view:             return .purple
         case .materializedView: return Color(nsColor: .systemTeal)
         case .foreignTable:     return Color(nsColor: .systemIndigo)
-        case .systemTable:      return Color(nsColor: .systemGray)
+        case .systemTable:      return .gray
         }
     }
 
     static func textColor(isPendingDelete: Bool, isPendingTruncate: Bool) -> Color {
-        if isPendingDelete { return Color(nsColor: .systemRed) }
-        if isPendingTruncate { return Color(nsColor: .systemOrange) }
+        if isPendingDelete { return .red }
+        if isPendingTruncate { return .orange }
         return .primary
     }
 }
@@ -84,12 +84,12 @@ struct TableRow: View {
                 if isPendingDelete {
                     Image(systemName: "minus.circle.fill")
                         .font(.caption)
-                        .sidebarTint(Color(nsColor: .systemRed))
+                        .sidebarTint(.red)
                         .offset(x: 4, y: 4)
                 } else if isPendingTruncate {
                     Image(systemName: "exclamationmark.circle.fill")
                         .font(.caption)
-                        .sidebarTint(Color(nsColor: .systemOrange))
+                        .sidebarTint(.orange)
                         .offset(x: 4, y: 4)
                 }
             }

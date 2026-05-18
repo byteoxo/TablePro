@@ -29,7 +29,7 @@ struct DataGridSection: View {
                 if let error = settings.nullDisplayValidationError {
                     Text(error)
                         .font(.caption)
-                        .foregroundStyle(Color(nsColor: .systemRed))
+                        .foregroundStyle(.red)
                 }
             }
 
@@ -86,7 +86,7 @@ struct DataGridSection: View {
                 if let error = settings.queryResultRowCapValidationError {
                     Text(error)
                         .font(.caption)
-                        .foregroundStyle(Color(nsColor: .systemRed))
+                        .foregroundStyle(.red)
                 }
             }
         } header: {

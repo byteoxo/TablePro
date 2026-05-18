@@ -134,11 +134,11 @@ struct ConnectionSwitcherSheet: View {
 
             if isActive {
                 Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(Color(nsColor: .systemGreen))
+                    .foregroundStyle(.green)
                     .font(.body)
             } else if isConnected {
                 Circle()
-                    .fill(Color(nsColor: .systemGreen))
+                    .fill(.green)
                     .frame(width: 6, height: 6)
             }
 

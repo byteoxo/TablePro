@@ -131,7 +131,7 @@ struct FilterPanelView: View {
                             if !presetColumnsMatch(preset) {
                                 Spacer()
                                 Image(systemName: "exclamationmark.triangle.fill")
-                                    .foregroundStyle(Color(nsColor: .systemYellow))
+                                    .foregroundStyle(.yellow)
                                     .help(String(localized: "Some columns in this preset don't exist in the current table"))
                             }
                         }

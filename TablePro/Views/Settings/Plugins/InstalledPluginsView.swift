@@ -71,7 +71,7 @@ struct InstalledPluginsView: View {
     private var restartBanner: some View {
         HStack(spacing: 8) {
             Image(systemName: "exclamationmark.triangle")
-                .foregroundStyle(Color(nsColor: .systemYellow))
+                .foregroundStyle(.yellow)
             Text("Restart TablePro to fully unload removed plugins.")
                 .font(.callout)
             Spacer()
@@ -198,7 +198,7 @@ struct InstalledPluginsView: View {
 
             if pluginManager.registryUpdate(for: plugin.id) != nil {
                 Image(systemName: "arrow.up.circle.fill")
-                    .foregroundStyle(Color(nsColor: .systemBlue))
+                    .foregroundStyle(.blue)
                     .font(.caption)
             }
 
@@ -351,7 +351,7 @@ struct InstalledPluginsView: View {
                     String(format: String(localized: "Updated to v%@"), registryPlugin.version),
                     systemImage: "checkmark.circle.fill"
                 )
-                .foregroundStyle(Color(nsColor: .systemGreen))
+                .foregroundStyle(.green)
                 .font(.callout)
             case .failed:
                 Button(String(localized: "Retry Update")) { updatePlugin(registryPlugin) }
@@ -362,7 +362,7 @@ struct InstalledPluginsView: View {
             HStack(spacing: 8) {
                 Text(String(format: String(localized: "v%@ available"), registryPlugin.version))
                     .font(.callout)
-                    .foregroundStyle(Color(nsColor: .systemBlue))
+                    .foregroundStyle(.blue)
                 Button(String(localized: "Update")) { updatePlugin(registryPlugin) }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.small)

@@ -311,7 +311,7 @@ struct ExportDialog: View {
                         if let plugin = currentPlugin, !type(of: plugin).perTableOptionColumns.isEmpty, exportableCount < selectedCount {
                             Text("\(selectedCount - exportableCount) skipped (no options)")
                                 .font(.subheadline)
-                                .foregroundStyle(Color(nsColor: .systemOrange))
+                                .foregroundStyle(.orange)
                         }
                     }
                 }
@@ -361,7 +361,7 @@ struct ExportDialog: View {
                 if let validationError = fileNameValidationError {
                     Text(validationError)
                         .font(.subheadline)
-                        .foregroundStyle(Color(nsColor: .systemRed))
+                        .foregroundStyle(.red)
                 }
             }
             .padding(16)

@@ -50,7 +50,7 @@ struct TerminalSettingsView: View {
 
             Picker("Font size:", selection: $settings.fontSize) {
                 ForEach(9 ... 24, id: \.self) { size in
-                    Text("\(size)").tag(size)
+                    Text(verbatim: "\(size)").tag(size)
                 }
             }
 

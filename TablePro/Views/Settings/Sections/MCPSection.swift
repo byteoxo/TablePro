@@ -108,7 +108,7 @@ struct MCPSection: View {
                     Text(String(localized: "The server will be accessible from other devices on your network. Authentication and TLS are enabled automatically."))
                 } icon: {
                     Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundStyle(Color(nsColor: .systemOrange))
+                        .foregroundStyle(.orange)
                 }
                 .font(.callout)
             }

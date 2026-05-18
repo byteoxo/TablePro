@@ -163,11 +163,11 @@ struct AIProviderDetailSheet: View {
             }
             if case .success = testResult {
                 Label(String(localized: "Connection successful"), systemImage: "checkmark.circle.fill")
-                    .foregroundStyle(Color(nsColor: .systemGreen))
+                    .foregroundStyle(.green)
                     .font(.caption)
             } else if case .failure(let message) = testResult {
                 Label(message, systemImage: "xmark.circle.fill")
-                    .foregroundStyle(Color(nsColor: .systemRed))
+                    .foregroundStyle(.red)
                     .font(.caption)
                     .lineLimit(3)
             }
@@ -212,7 +212,7 @@ struct AIProviderDetailSheet: View {
                         String(format: String(localized: "Signed in as %@"), username),
                         systemImage: "checkmark.circle.fill"
                     )
-                    .foregroundStyle(Color(nsColor: .systemGreen))
+                    .foregroundStyle(.green)
                     Spacer()
                     Button(String(localized: "Sign Out")) {
                         Task { await copilotService.signOut() }
@@ -223,7 +223,7 @@ struct AIProviderDetailSheet: View {
             if let copilotErrorMessage {
                 Text(copilotErrorMessage)
                     .font(.caption)
-                    .foregroundStyle(Color(nsColor: .systemRed))
+                    .foregroundStyle(.red)
             }
 
             statusRow
@@ -262,7 +262,7 @@ struct AIProviderDetailSheet: View {
             EmptyView()
         case .error(let message):
             Label(message, systemImage: "exclamationmark.triangle.fill")
-                .foregroundStyle(Color(nsColor: .systemOrange))
+                .foregroundStyle(.orange)
                 .font(.caption)
                 .lineLimit(2)
         }
@@ -422,7 +422,7 @@ struct AIProviderDetailSheet: View {
             HStack {
                 Text(modelFetchError)
                     .font(.caption)
-                    .foregroundStyle(Color(nsColor: .systemRed))
+                    .foregroundStyle(.red)
                     .lineLimit(2)
                 Spacer()
                 Button(String(localized: "Reload")) {

@@ -104,7 +104,7 @@ struct WelcomeActionsPanel: View {
         if LicenseManager.shared.status.isValid {
             Label(String(localized: "Pro"), systemImage: "checkmark.seal.fill")
                 .font(.subheadline.weight(.medium))
-                .foregroundStyle(Color(nsColor: .systemGreen))
+                .foregroundStyle(.green)
         } else {
             Button(action: onActivateLicense) {
                 Text(String(localized: "Activate License"))

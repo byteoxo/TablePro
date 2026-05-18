@@ -33,10 +33,10 @@ enum ConnectionEnvironment: String, CaseIterable {
     /// Badge background color
     var backgroundColor: Color {
         switch self {
-        case .local: return Color(nsColor: .systemGray).opacity(0.3)
-        case .ssh: return Color(nsColor: .systemOrange).opacity(0.3)
-        case .production: return Color(nsColor: .systemRed).opacity(0.3)
-        case .staging: return Color(nsColor: .systemBlue).opacity(0.3)
+        case .local: return .gray.opacity(0.3)
+        case .ssh: return .orange.opacity(0.3)
+        case .production: return .red.opacity(0.3)
+        case .staging: return .blue.opacity(0.3)
         }
     }
 
@@ -44,9 +44,9 @@ enum ConnectionEnvironment: String, CaseIterable {
     var foregroundColor: Color {
         switch self {
         case .local: return .secondary
-        case .ssh: return Color(nsColor: .systemOrange)
-        case .production: return Color(nsColor: .systemRed)
-        case .staging: return Color(nsColor: .systemBlue)
+        case .ssh: return .orange
+        case .production: return .red
+        case .staging: return .blue
         }
     }
 }
@@ -64,11 +64,11 @@ enum ToolbarConnectionState: Equatable {
     /// Status indicator color
     var indicatorColor: Color {
         switch self {
-        case .disconnected: return Color(nsColor: .systemGray)
-        case .connecting: return Color(nsColor: .systemOrange)
-        case .connected: return Color(nsColor: .systemGreen)
-        case .executing: return Color(nsColor: .systemBlue)
-        case .error: return Color(nsColor: .systemRed)
+        case .disconnected: return .gray
+        case .connecting: return .orange
+        case .connected: return .green
+        case .executing: return .blue
+        case .error: return .red
         }
     }
 

@@ -153,7 +153,7 @@ struct OnboardingContentView: View {
                 .font(.largeTitle)
                 .imageScale(.large)
                 .symbolRenderingMode(.hierarchical)
-                .foregroundStyle(Color(nsColor: .systemGreen))
+                .foregroundStyle(.green)
 
             Text("You're all set!")
                 .font(.title2.weight(.bold))
