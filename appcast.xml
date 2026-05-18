@@ -3,6 +3,89 @@
     <channel>
         <title>TablePro</title>
         <item>
+            <title>0.43.0</title>
+            <pubDate>Mon, 18 May 2026 12:08:28 +0000</pubDate>
+            <sparkle:version>86</sparkle:version>
+            <sparkle:shortVersionString>0.43.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <description><![CDATA[<h3>Added</h3>
+<ul>
+<li>Import connections from Beekeeper Studio, including encrypted passwords and SSH bastion hosts</li>
+<li>Schema picker at the bottom of the Tables sidebar to switch the active schema (#1296)</li>
+<li>Inline dropdown picker when editing ENUM and SET columns across MySQL, MariaDB, PostgreSQL, ClickHouse, DuckDB, and MongoDB JSON-schema enums (#1283)</li>
+<li>Filter rows show an enum dropdown for `=` and `!=` operators on enum columns (#1283)</li>
+<li>CSV/TSV inspector: edit cells, filter, sort, add/remove/rename columns, undo/redo, auto-reload on external changes; large files stream from disk (#1259)</li>
+<li>iOS: SQL Server connections via FreeTDS over TDS 7.4, with schema browsing, data browser, search, filter, pagination, and explicit transactions</li>
+<li>iOS: Settings > Sync shows last sync time with Sync Now and Refresh from iCloud actions</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Drivers populate allowed enum values directly in column metadata instead of parsing them downstream</li>
+<li>PluginKit ABI bumped to version 13; all registry plugins need to be re-tagged</li>
+<li>New PostgreSQL, MySQL, MariaDB, SQL Server, Redshift, and CockroachDB connections default to Preferred SSL mode, matching the native client library defaults</li>
+<li>MySQL and MariaDB Preferred mode now does a 2-pass connect: tries TLS first, falls back to plaintext only on SSL handshake errors (auth and network errors are not retried)</li>
+<li>SSL pane shows per-engine guidance and warns inline when the driver has no TLS fallback for Preferred mode</li>
+<li>Connection failures caused by SSL handshake errors now show a structured message naming the cause and recommending an SSL Mode to switch to, with credentials redacted from the raw driver response</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Import from other apps now detects TablePlus, Sequel Ace, and DBeaver via LaunchServices, so newly installed apps are picked up before they have been opened (#1305)</li>
+<li>ClickHouse and other HTTP-based drivers can now connect to plain-HTTP servers addressed by DNS hostname (#1316)</li>
+<li>Import from TablePlus now reads passwords from the keychain correctly instead of returning empty</li>
+<li>Port numbers no longer render with a thousand separator under locales that use a dot as a digit separator</li>
+<li>New query tab (Cmd+T) no longer jumps focus back to the previous table tab on SQLite and other file-based databases (#1313)</li>
+<li>File-based databases (SQLite, DuckDB) no longer flash the sidebar table list on window focus; external changes are picked up via the file watcher instead</li>
+<li>PostgreSQL connections to AWS RDS, Cloud SQL, Azure, and other hosted Postgres no longer fail with "no pg_hba.conf entry for host" (#1298)</li>
+<li>Oracle SSL/TCPS settings from the SSL pane are now respected; previously every Oracle connection was plain TCP</li>
+<li>Cassandra SSL settings from the SSL pane are now respected; previously every Cassandra connection was plain TCP</li>
+<li>MySQL and MariaDB Preferred mode no longer fails against Cloud SQL, Azure Database, and other hosted MySQL servers that require TLS</li>
+</ul>
+]]></description>
+            <enclosure url="https://github.com/TableProApp/TablePro/releases/download/v0.43.0/TablePro-0.43.0-arm64.zip" length="21466498" type="application/octet-stream" sparkle:edSignature="lxV17IhynOmNfircQwwVypEOnydqaeLw0uENCxBvCveXUjD+6ZH84oVMbHltGOHtLjmT3yu1YOH0A+O40ArBCQ=="/>
+        </item>
+        <item>
+            <title>0.43.0</title>
+            <pubDate>Mon, 18 May 2026 12:08:30 +0000</pubDate>
+            <sparkle:version>86</sparkle:version>
+            <sparkle:shortVersionString>0.43.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h3>Added</h3>
+<ul>
+<li>Import connections from Beekeeper Studio, including encrypted passwords and SSH bastion hosts</li>
+<li>Schema picker at the bottom of the Tables sidebar to switch the active schema (#1296)</li>
+<li>Inline dropdown picker when editing ENUM and SET columns across MySQL, MariaDB, PostgreSQL, ClickHouse, DuckDB, and MongoDB JSON-schema enums (#1283)</li>
+<li>Filter rows show an enum dropdown for `=` and `!=` operators on enum columns (#1283)</li>
+<li>CSV/TSV inspector: edit cells, filter, sort, add/remove/rename columns, undo/redo, auto-reload on external changes; large files stream from disk (#1259)</li>
+<li>iOS: SQL Server connections via FreeTDS over TDS 7.4, with schema browsing, data browser, search, filter, pagination, and explicit transactions</li>
+<li>iOS: Settings > Sync shows last sync time with Sync Now and Refresh from iCloud actions</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Drivers populate allowed enum values directly in column metadata instead of parsing them downstream</li>
+<li>PluginKit ABI bumped to version 13; all registry plugins need to be re-tagged</li>
+<li>New PostgreSQL, MySQL, MariaDB, SQL Server, Redshift, and CockroachDB connections default to Preferred SSL mode, matching the native client library defaults</li>
+<li>MySQL and MariaDB Preferred mode now does a 2-pass connect: tries TLS first, falls back to plaintext only on SSL handshake errors (auth and network errors are not retried)</li>
+<li>SSL pane shows per-engine guidance and warns inline when the driver has no TLS fallback for Preferred mode</li>
+<li>Connection failures caused by SSL handshake errors now show a structured message naming the cause and recommending an SSL Mode to switch to, with credentials redacted from the raw driver response</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Import from other apps now detects TablePlus, Sequel Ace, and DBeaver via LaunchServices, so newly installed apps are picked up before they have been opened (#1305)</li>
+<li>ClickHouse and other HTTP-based drivers can now connect to plain-HTTP servers addressed by DNS hostname (#1316)</li>
+<li>Import from TablePlus now reads passwords from the keychain correctly instead of returning empty</li>
+<li>Port numbers no longer render with a thousand separator under locales that use a dot as a digit separator</li>
+<li>New query tab (Cmd+T) no longer jumps focus back to the previous table tab on SQLite and other file-based databases (#1313)</li>
+<li>File-based databases (SQLite, DuckDB) no longer flash the sidebar table list on window focus; external changes are picked up via the file watcher instead</li>
+<li>PostgreSQL connections to AWS RDS, Cloud SQL, Azure, and other hosted Postgres no longer fail with "no pg_hba.conf entry for host" (#1298)</li>
+<li>Oracle SSL/TCPS settings from the SSL pane are now respected; previously every Oracle connection was plain TCP</li>
+<li>Cassandra SSL settings from the SSL pane are now respected; previously every Cassandra connection was plain TCP</li>
+<li>MySQL and MariaDB Preferred mode no longer fails against Cloud SQL, Azure Database, and other hosted MySQL servers that require TLS</li>
+</ul>
+]]></description>
+            <enclosure url="https://github.com/TableProApp/TablePro/releases/download/v0.43.0/TablePro-0.43.0-x86_64.zip" length="22743912" type="application/octet-stream" sparkle:edSignature="OR4zeBY7cafy++iEZR7TUSbcc1xtc1tCNhxFTy8uca6rQQBkZyhXwNovFuRa1GUFBG5k+mz/9aDRL5K7JAEHCA=="/>
+        </item>
+        <item>
             <title>0.42.0</title>
             <pubDate>Sat, 16 May 2026 14:19:38 +0000</pubDate>
             <sparkle:version>85</sparkle:version>
