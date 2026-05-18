@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Import from TablePlus now reads passwords from the keychain correctly; previously it queried the wrong service name and silently returned empty passwords without prompting
+- Port numbers in the import preview, welcome screen linked-file list, and plugin details no longer render with a thousand separator (e.g. 3306 instead of 3.306) under Vietnamese, German, and other locales that use a dot as a digit separator
 - New query tab (Cmd+T) no longer jumps focus back to the previous table tab on SQLite and other file-based databases (#1313)
 - File-based databases (SQLite, DuckDB) no longer flash the sidebar table list every time a window becomes key; external file changes are picked up reactively via the file watcher instead of polling on focus
 - PostgreSQL connections to AWS RDS, Cloud SQL, Azure, and other hosted Postgres now succeed out of the box instead of failing with "no pg_hba.conf entry for host" (#1298)

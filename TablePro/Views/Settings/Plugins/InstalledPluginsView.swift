@@ -288,7 +288,7 @@ struct InstalledPluginsView: View {
                                 GridRow {
                                     Text("Default Port")
                                         .foregroundStyle(.secondary)
-                                    Text("\(port)")
+                                    Text(verbatim: "\(port)")
                                 }
                             }
                         }

@@ -230,7 +230,7 @@ struct TablePlusImporter: ForeignAppImporter {
     private func readCredentials(for connectionId: String, abortFlag: inout Bool) -> ExportableCredentials {
         func read(_ account: String) -> String? {
             guard !abortFlag else { return nil }
-            switch ForeignKeychainReader.readPassword(service: "com.tableplus.TablePlus", account: account) {
+            switch ForeignKeychainReader.readPassword(service: "com.tinyapp.TablePlus", account: account) {
             case .found(let value):
                 return value
             case .notFound:
