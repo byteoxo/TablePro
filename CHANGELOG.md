@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- The license activation sheet focuses the key field on open, the SQL review sheet closes with Escape even while the editor has focus, and the integration token sheet focuses its Done button. (#1490)
 - Copy with Headers now has a default keyboard shortcut (Cmd+Option+C), so it works and is discoverable from the keyboard instead of showing in the Edit menu with no key. (#1490)
 - VoiceOver now reads the column name and current value for each field editor in the cell inspector. (#1490)
 - VoiceOver announces the active tab title when you switch between window tabs. (#1490)
