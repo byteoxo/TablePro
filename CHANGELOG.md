@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.49.0] - 2026-06-06
+
 ### Added
 
 - Snowflake support: sign in with username & password (MFA included), key-pair, browser SSO, or an access token; browse and edit data, import CSV and JSON, edit table structure, run scripts, and switch warehouse and role from the toolbar. Snowflake CLI connections can be reused by name. (#1420)
@@ -2174,7 +2176,8 @@ TablePro is a native macOS database client built with SwiftUI and AppKit, design
     - Custom SQL query templates
     - Performance optimized for large datasets
 
-[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.48.0...HEAD
+[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.49.0...HEAD
+[0.49.0]: https://github.com/TableProApp/TablePro/compare/v0.48.0...v0.49.0
 [0.48.0]: https://github.com/TableProApp/TablePro/compare/v0.47.0...v0.48.0
 [0.47.0]: https://github.com/TableProApp/TablePro/compare/v0.46.0...v0.47.0
 [0.46.0]: https://github.com/TableProApp/TablePro/compare/v0.45.0...v0.46.0
