@@ -90,6 +90,15 @@ extension MainContentCoordinator {
         return schema.columns
     }
 
+    func cachedSchemaColumns(for tab: QueryTab) -> (columns: [String], primaryKeys: [String])? {
+        guard let tableName = tab.tableContext.tableName else { return nil }
+        return schemaColumnsCache[schemaColumnsKey(tableName, schema: tab.tableContext.schemaName)]
+    }
+
+    func effectiveResultColumns(for tab: QueryTab) -> [String] {
+        selectColumns(for: tab) ?? cachedSchemaColumns(for: tab)?.columns ?? []
+    }
+
     private func schemaColumnsKey(_ tableName: String, schema: String?) -> String {
         "\(connectionId):\(activeDatabaseName):\(schema ?? ""):\(tableName)"
     }

@@ -180,6 +180,7 @@ final class MainContentCoordinator {
 
     @ObservationIgnored var schemaColumnsCache: [String: (columns: [String], primaryKeys: [String])] = [:]
     @ObservationIgnored var columnScopeRequeryTask: Task<Void, Never>?
+    @ObservationIgnored var defaultSortResolveTask: Task<Void, Never>?
 
     @ObservationIgnored var pendingScrollToTopAfterReplace: Set<UUID> = []
 
@@ -657,6 +658,7 @@ final class MainContentCoordinator {
         displayFormatsCache.removeAll()
         schemaColumnsCache.removeAll()
         columnScopeRequeryTask?.cancel()
+        defaultSortResolveTask?.cancel()
 
         tabManager.tabs.removeAll()
         tabManager.selectedTabId = nil
@@ -852,6 +854,16 @@ final class MainContentCoordinator {
     func executeTableTabQueryDirectly() {
         guard let (tab, index) = tabManager.selectedTabAndIndex,
               !tab.execution.isExecuting else { return }
+
+        defaultSortResolveTask?.cancel()
+        if shouldResolveDefaultSort(for: tab) {
+            let tabId = tab.id
+            tabManager.mutate(at: index) { $0.execution.didEvaluateDefaultSort = true }
+            defaultSortResolveTask = Task { @MainActor [weak self] in
+                await self?.resolveDefaultSortThenExecuteTableQuery(tabId: tabId)
+            }
+            return
+        }
 
         let sql = tab.content.query
         guard !sql.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
