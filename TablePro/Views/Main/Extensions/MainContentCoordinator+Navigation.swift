@@ -401,11 +401,32 @@ extension MainContentCoordinator {
 
             navigationLogger.error("Failed to switch database: \(error.localizedDescription, privacy: .public)")
             AlertHelper.showErrorSheet(
-                title: String(localized: "Database Switch Failed"),
+                title: String(
+                    format: String(localized: "%@ Switch Failed"),
+                    PluginManager.shared.containerEntityName(for: connection.type)
+                ),
                 message: error.localizedDescription,
                 window: contentWindow
             )
         }
+    }
+
+    /// Switch the active container (database, or schema for schema-switching-only
+    /// engines like BigQuery), routing by the plugin's container switch target.
+    func switchContainer(to container: String) async {
+        switch PluginManager.shared.containerSwitchTarget(for: connection.type) {
+        case .schema:
+            await switchSchema(to: container)
+        case .database, nil:
+            await switchDatabase(to: container)
+        }
+    }
+
+    private var schemaEntityName: String {
+        guard PluginManager.shared.containerSwitchTarget(for: connection.type) == .schema else {
+            return String(localized: "Schema")
+        }
+        return PluginManager.shared.containerEntityName(for: connection.type)
     }
 
     func switchSchema(to schema: String) async {
@@ -441,7 +462,7 @@ extension MainContentCoordinator {
 
             navigationLogger.error("Failed to switch schema: \(error.localizedDescription, privacy: .public)")
             AlertHelper.showErrorSheet(
-                title: String(localized: "Schema Switch Failed"),
+                title: String(format: String(localized: "%@ Switch Failed"), schemaEntityName),
                 message: error.localizedDescription,
                 window: contentWindow
             )
