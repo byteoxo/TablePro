@@ -7558,6 +7558,7 @@
       }
     },
     "Applied" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -7759,6 +7760,7 @@
       }
     },
     "Apply only this filter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -7779,6 +7781,9 @@
           }
         }
       }
+    },
+    "Apply Only This Filter" : {
+
     },
     "Apply Schema Changes" : {
       "localizations" : {
@@ -11710,6 +11715,9 @@
         }
       }
     },
+    "Clear applied filters without removing filter rows" : {
+
+    },
     "Clear Conversation" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -14096,6 +14104,9 @@
           }
         }
       }
+    },
+    "Connect to load the database list." : {
+
     },
     "Connect to popular databases with full feature support" : {
       "localizations" : {
@@ -22869,6 +22880,9 @@
         }
       }
     },
+    "Enable or disable all filters" : {
+
+    },
     "Enable preview tabs" : {
       "localizations" : {
         "tr" : {
@@ -27274,6 +27288,7 @@
       }
     },
     "Filter by only this row" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -27339,6 +27354,9 @@
           }
         }
       }
+    },
+    "Filter databases" : {
+
     },
     "Filter favorites" : {
       "localizations" : {
@@ -27631,6 +27649,7 @@
       }
     },
     "Filtering by only this row" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -39101,6 +39120,9 @@
         }
       }
     },
+    "No Databases Shown" : {
+
+    },
     "No Datasets" : {
       "localizations" : {
         "tr" : {
@@ -48573,7 +48595,11 @@
         }
       }
     },
+    "Remove All Filters" : {
+
+    },
     "Remove all filters and reload" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {
@@ -54772,6 +54798,12 @@
         }
       }
     },
+    "Showing %1$lld of %2$lld" : {
+
+    },
+    "Showing all databases" : {
+
+    },
     "Showing first 50,000 keys" : {
       "localizations" : {
         "tr" : {
@@ -60067,6 +60099,9 @@
     "The Cursor CLI is not installed. Install it, then sign in." : {
 
     },
+    "The database filter hides every database on this connection." : {
+
+    },
     "The destructive query to execute" : {
       "localizations" : {
         "tr" : {
@@ -64050,6 +64085,7 @@
       }
     },
     "Unset" : {
+      "extractionState" : "stale",
       "localizations" : {
         "tr" : {
           "stringUnit" : {

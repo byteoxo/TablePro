@@ -7,25 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.51.1] - 2026-06-16
+
 ### Added
 
-- The tree sidebar can show only the databases you pick. Use the filter button to check the ones you want, with a search box for long lists. The choice is saved per connection. (#1667)
-- Closing a query tab no longer loses unsaved SQL. The next blank query tab you open for the same connection brings the last closed draft back. (#1686)
-- A checkbox in the filter panel header turns every filter row on or off at once. It shows a dash when only some rows are on.
+- The tree sidebar can filter to only the databases you pick, saved per connection. (#1667)
+- Closing a query tab no longer loses unsaved SQL. The next blank query tab for the same connection restores the last closed draft. (#1686)
+- A checkbox in the filter panel header turns every filter row on or off at once, with a dash when only some are on.
 
 ### Changed
 
-- The filter panel's "Unset" button is now "Clear". It keeps your filter rows and only drops the applied state, so the table returns to unfiltered results. To remove the rows themselves, use "Remove All Filters" in the filter options menu.
-- Apply a single filter on its own from a row's right-click menu with "Apply Only This Filter". The inline per-row Apply button is gone.
+- The filter panel's "Unset" button is now "Clear". It keeps your filter rows and only drops the applied state. To remove the rows, use "Remove All Filters" in the filter options menu.
+- A row's right-click menu now has "Apply Only This Filter". The inline per-row Apply button is gone.
 
 ### Fixed
 
-- Shift+Arrow in the data grid now starts and extends a cell selection from the focused cell, instead of doing nothing until a range already existed. Cmd+Shift+Arrow extends to the row or column edge.
-- Delete key now respects cell-range selection in the data grid, removing all rows covered by the selection instead of ignoring it.
-- Right-clicking inside a multi-row or cell-range selection no longer collapses the selection before the context menu appears.
-- Oracle connections no longer crash the app during connect. A short or unexpected handshake packet from the server (such as session-setup metadata or an error) now surfaces the error or continues instead of trapping. (#1683)
-- MongoDB filters on `_id` and other ObjectId fields now match. A 24-character hex value is matched as an ObjectId as well as a string, so filtering by `_id` returns the row instead of nothing. (#1682)
-- The sidebar and inspector keep their width per connection, the sidebar keeps its collapsed state, and the inspector keeps its selected tab, when you quit and reopen the app.
+- Shift+Arrow in the data grid now starts and extends a cell selection from the focused cell. Cmd+Shift+Arrow extends to the row or column edge.
+- Delete key now removes all rows covered by a cell-range selection instead of ignoring it.
+- Right-clicking inside a multi-row or cell-range selection no longer collapses the selection first.
+- Oracle connections no longer crash during connect when the server sends a short or unexpected handshake packet. (#1683)
+- MongoDB filters on `_id` and other ObjectId fields now match. A 24-character hex value is matched as an ObjectId as well as a string. (#1682)
+- The sidebar and inspector keep their width per connection, the sidebar its collapsed state, and the inspector its selected tab, across quit and reopen.
 
 ## [0.51.0] - 2026-06-13
 
@@ -2288,7 +2290,8 @@ TablePro is a native macOS database client built with SwiftUI and AppKit, design
     - Custom SQL query templates
     - Performance optimized for large datasets
 
-[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.51.0...HEAD
+[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.51.1...HEAD
+[0.51.1]: https://github.com/TableProApp/TablePro/compare/v0.51.0...v0.51.1
 [0.51.0]: https://github.com/TableProApp/TablePro/compare/v0.50.0...v0.51.0
 [0.50.0]: https://github.com/TableProApp/TablePro/compare/v0.49.1...v0.50.0
 [0.49.1]: https://github.com/TableProApp/TablePro/compare/v0.49.0...v0.49.1
