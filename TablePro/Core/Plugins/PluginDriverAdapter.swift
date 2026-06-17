@@ -251,6 +251,18 @@ final class PluginDriverAdapter: DatabaseDriver, SchemaSwitchable {
         }
     }
 
+    func fetchTriggers(table: String) async throws -> [TriggerInfo] {
+        let pluginTriggers = try await pluginDriver.fetchTriggers(table: table, schema: pluginDriver.currentSchema)
+        return pluginTriggers.map { trigger in
+            TriggerInfo(
+                name: trigger.name,
+                timing: trigger.timing,
+                event: trigger.event,
+                statement: trigger.statement
+            )
+        }
+    }
+
     func fetchApproximateRowCount(table: String) async throws -> Int? {
         try await pluginDriver.fetchApproximateRowCount(table: table, schema: pluginDriver.currentSchema)
     }
