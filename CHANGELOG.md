@@ -7,33 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.52.0] - 2026-06-19
+
 ### Added
 
-- The table structure view has a Triggers tab for MySQL, MariaDB, PostgreSQL, SQLite, SQL Server, Oracle, libSQL, and Cloudflare D1. It lists each trigger with its timing and event (plus enabled state where the engine reports it), with a filter field and sortable columns. Selecting a trigger shows its full definition in a read-only syntax-highlighted viewer. (#1695)
-- Triggers can be created, edited, and dropped from the Triggers tab. The editor opens the trigger's real definition (for PostgreSQL, its function and trigger together) so nothing is lost on save, and changes run through the usual confirmation and safe-mode checks. (#1695)
-- Traditional Chinese (繁體中文) language in Settings > General with full UI translation
+- Triggers tab in the table structure view for MySQL, MariaDB, PostgreSQL, SQLite, SQL Server, Oracle, libSQL, and Cloudflare D1, with a filter field, sortable columns, and a read-only view of each trigger's definition. (#1695)
+- Create, edit, and drop triggers from the Triggers tab. (#1695)
+- Traditional Chinese (繁體中文) language in Settings > General.
 - An Add button in the table status bar inserts a new row at the end of the grid and starts editing it.
-- DuckDB connections can now reach a remote server over the Quack protocol (experimental). Pick Remote (Quack) in the connection form, enter the host, port, and token, then run SQL against the remote. Listing remote tables in the sidebar is not available yet because the Quack beta cannot enumerate a remote catalog. Needs DuckDB 1.5.3 or later. (#1716)
+- DuckDB connections can now reach a remote server over the Quack protocol (experimental). Pick Remote (Quack) in the connection form, enter the host, port, and token. Listing remote tables in the sidebar is not available yet. Needs DuckDB 1.5.3 or later. (#1716)
 
 ### Changed
 
-- Selecting a Redis namespace in the sidebar key tree now filters the open database view to that prefix, with paging, instead of opening a separate tab limited to one batch of keys. (#1701)
+- Selecting a Redis namespace in the sidebar now filters the open view to that prefix with paging, instead of opening a separate tab. (#1701)
 
 ### Fixed
 
-- SQL autocomplete now suggests columns for a derived-table or CTE alias, reading the subquery's output columns. Before, typing `alias.` for a `JOIN (SELECT ...) alias` or a `WITH` table returned nothing. (#1697)
-- Redis entries no longer disappear after the connection sits idle. The health check was running `SELECT 1`, which on Redis switches the active database, so a later refresh scanned the wrong database. (#1701)
-- Redis key browsing now lists every key in a database or namespace and pages through them correctly. It was reading only the first SCAN batch, so large keyspaces showed a partial, fixed set of keys. (#1701)
-- A dropped Redis connection now reconnects on the next command and replays auth and the selected database, instead of failing until the next health check. (#1701)
+- SQL autocomplete now suggests columns for a derived-table or CTE alias. (#1697)
+- Redis entries no longer disappear after the connection sits idle. (#1701)
+- Redis key browsing now lists and pages through every key in a database or namespace, instead of only the first SCAN batch. (#1701)
+- A dropped Redis connection now reconnects on the next command and replays auth and the selected database. (#1701)
 - DuckDB VARIANT columns now show their value as text instead of an empty cell.
 - A new database group now appears in the connection list right away instead of only after restarting the app. (#1704)
-- The SQL formatter keeps nested indentation for UNION, UNION ALL, INTERSECT, and EXCEPT inside a derived table or CTE, and puts the closing parenthesis of a subquery on its own line instead of collapsing it onto the last SELECT. (#1698)
-- Toolbar button tooltips now show each action's real keyboard shortcut and follow your custom bindings, instead of a fixed value. The Switch Connection tooltip showed the wrong shortcut. (#1694)
-- Deleting a table from the sidebar now removes it from the tree right away on multi-database servers like MySQL and PostgreSQL. The tree kept showing the dropped table until you refreshed it by hand. (#1714)
-- The row detail panel no longer stays blank when a table is opened in a second tab. The panel now shows the selected row right away instead of only after the inspector is toggled.
-- The sidebar filter now stays put when you open another tab. Before, opening a second table tab cleared the filter text and reset the table list to show everything.
-- Fixed a crash when browsing the database tree on servers with many schemas, such as PostgreSQL. The sidebar tree is now a native outline view that loads each database and schema on demand.
-- Reopening the app no longer shows a "Not connected to database" error when it restores a table tab on a connection that is still reconnecting, such as one over SSH. The tab waits for the connection and loads on its own.
+- The SQL formatter keeps nested indentation for UNION, INTERSECT, and EXCEPT inside a subquery, and puts the closing parenthesis on its own line. (#1698)
+- Toolbar button tooltips now show each action's real keyboard shortcut and follow your custom bindings. (#1694)
+- Deleting a table from the sidebar now removes it from the tree right away on multi-database servers like MySQL and PostgreSQL. (#1714)
+- The row detail panel no longer stays blank when a table is opened in a second tab.
+- The sidebar filter now stays put when you open another tab.
+- Fixed a crash when browsing the database tree on servers with many schemas, such as PostgreSQL.
+- Reopening the app no longer shows a "Not connected to database" error when it restores a table tab on a connection that is still reconnecting, such as one over SSH.
 
 ## [0.51.1] - 2026-06-16
 
@@ -2324,7 +2326,8 @@ TablePro is a native macOS database client built with SwiftUI and AppKit, design
     - Custom SQL query templates
     - Performance optimized for large datasets
 
-[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.51.1...HEAD
+[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.52.0...HEAD
+[0.52.0]: https://github.com/TableProApp/TablePro/compare/v0.51.1...v0.52.0
 [0.51.1]: https://github.com/TableProApp/TablePro/compare/v0.51.0...v0.51.1
 [0.51.0]: https://github.com/TableProApp/TablePro/compare/v0.50.0...v0.51.0
 [0.50.0]: https://github.com/TableProApp/TablePro/compare/v0.49.1...v0.50.0
