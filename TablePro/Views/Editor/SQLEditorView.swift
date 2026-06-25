@@ -23,6 +23,7 @@ struct SQLEditorView: View {
     var connectionId: UUID?
     var connectionAIPolicy: AIConnectionPolicy?
     var tabID: UUID?
+    var claimFocusOnAppear: Bool = false
     @Binding var vimMode: VimMode
     var onCloseTab: (() -> Void)?
     var onExecuteQuery: (() -> Void)?
@@ -59,6 +60,11 @@ struct SQLEditorView: View {
             completionDelegate: completionAdapter
         )
         .accessibilityLabel(String(localized: "SQL query editor"))
+        .onAppear {
+            if claimFocusOnAppear {
+                coordinator.scheduleEditorFocusClaim()
+            }
+        }
         .onChange(of: editorState.cursorPositions) { _, newValue in
             guard let positions = newValue else { return }
             // Skip cursor propagation when the editor doesn't have focus
