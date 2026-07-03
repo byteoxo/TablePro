@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.55.0] - 2026-07-04
+
 ### Added
 
 - iOS: add data to a table from the Shortcuts app. Two new shortcuts, Add Row to Table and Add Rows to Table, pick a saved connection, database or schema, and table, then insert from JSON or CSV. They run without opening the app. (#1788)
@@ -2420,7 +2422,8 @@ TablePro is a native macOS database client built with SwiftUI and AppKit, design
     - Custom SQL query templates
     - Performance optimized for large datasets
 
-[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.54.0...HEAD
+[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.55.0...HEAD
+[0.55.0]: https://github.com/TableProApp/TablePro/compare/v0.54.0...v0.55.0
 [0.54.0]: https://github.com/TableProApp/TablePro/compare/v0.53.0...v0.54.0
 [0.53.0]: https://github.com/TableProApp/TablePro/compare/v0.52.1...v0.53.0
 [0.52.1]: https://github.com/TableProApp/TablePro/compare/v0.52.0...v0.52.1
