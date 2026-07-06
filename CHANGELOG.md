@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Recent section at the top of the sidebar tracks the last 10 tables you opened per connection and database, in every sidebar layout, and remembers them between launches. It records a table when you open it, not while you arrow through previews. Click a recent table to reopen it, or right-click to remove one or clear the list. Off by default, turn it on in Settings > General > Sidebar. (#1352)
+
 ### Fixed
 
 - Switching schemas on an Oracle connection no longer hangs on an infinite loading spinner. Oracle now switches by schema like BigQuery, the sidebar lists every schema with its tables loading on expand, Oracle queries respect the query timeout setting and reconnect automatically after a timeout, and a schema load that fails shows an error with a Retry button instead of spinning forever. Works with an already-installed Oracle plugin; updating the plugin adds the query timeout enforcement. (#1807)
