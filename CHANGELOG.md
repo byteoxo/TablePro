@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Custom AI slash commands now sync across your Macs with iCloud Sync, alongside your other settings.
+- Join a team from the activation window: paste the invite code your team owner sent instead of a license key. Owners manage members and seats from their account on tablepro.app.
+- Connections can take their password from 1Password (op://), HashiCorp Vault, or AWS Secrets Manager, resolved at connect time so the secret is never stored in TablePro.
+- Team plan: publish connections to a shared folder your team reads from, without sending passwords. Right-click a connection, then Share > Publish to Team Catalog. Teammates add the folder under Settings > Linked Folders.
+- Saved SQL queries and their folders now sync across your Macs when iCloud Sync is on. Toggle "Saved Queries" under Settings > Sync.
 - Recent section at the top of the sidebar tracks the last 10 tables you opened per connection and database, in every sidebar layout, and remembers them between launches. It records a table when you open it, not while you arrow through previews. Click a recent table to reopen it, or right-click to remove one or clear the list. Off by default, turn it on in Settings > General > Sidebar. (#1352)
 
 ### Fixed
