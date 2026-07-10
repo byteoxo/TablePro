@@ -1,3 +1,4 @@
+import Foundation
 import Testing
 @testable import TablePro
 import TableProPluginKit
@@ -114,5 +115,4 @@ private struct FakePluginAuthError: PluginDriverError {
     let pluginErrorMessage: String
     let pluginErrorCode: Int?
     let pluginSqlState: String?
-    var errorDescription: String? { pluginErrorMessage }
 }
