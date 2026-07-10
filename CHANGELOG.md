@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Data grid column comments now appear directly in column headers when object comments are enabled, instead of only being available from the header tooltip. (#1789)
+
 ### Fixed
 
 - MySQL and MariaDB connections that prompt for a password at connect time now ask for a fresh password after an auto-reconnect hits an authentication failure such as `1045` / `SQLSTATE 28000`, instead of looping forever in Connecting with the expired session password.
