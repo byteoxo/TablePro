@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.56.2] - 2026-07-10
+
 ### Added
 
 - The JSON field in the row details inspector can now be resized by dragging the handle below it. The height is remembered across rows and app restarts. (#1849)
@@ -2482,7 +2484,8 @@ TablePro is a native macOS database client built with SwiftUI and AppKit, design
     - Custom SQL query templates
     - Performance optimized for large datasets
 
-[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.56.1...HEAD
+[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.56.2...HEAD
+[0.56.2]: https://github.com/TableProApp/TablePro/compare/v0.56.1...v0.56.2
 [0.56.1]: https://github.com/TableProApp/TablePro/compare/v0.56.0...v0.56.1
 [0.56.0]: https://github.com/TableProApp/TablePro/compare/v0.55.0...v0.56.0
 [0.55.0]: https://github.com/TableProApp/TablePro/compare/v0.54.0...v0.55.0
