@@ -70,7 +70,11 @@ final class CloudSQLProxyPaneViewModel {
     func resolveBinary() {
         Task {
             let found = await Task.detached { CLIExecutableFinder.findExecutable("cloud-sql-proxy") }.value
-            resolvedBinaryPath = found ?? (await CloudSQLProxyBinaryManager.shared.cachedBinaryPath)
+            if let found {
+                resolvedBinaryPath = found
+            } else {
+                resolvedBinaryPath = await CloudSQLProxyBinaryManager.shared.cachedBinaryPath
+            }
             downloadedVersion = await CloudSQLProxyBinaryManager.shared.installedVersion()
             didResolveBinary = true
         }
