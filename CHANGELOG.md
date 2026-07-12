@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Connect to Google Cloud SQL through the Cloud SQL Auth Proxy without starting it yourself. Enable it on a MySQL, PostgreSQL, or SQL Server connection, set the instance connection name, and TablePro runs and stops the proxy with the connection. Supports Application Default Credentials, a service account key, and IAM database authentication, and can download the proxy or use one already on your Mac. (#1728)
 - Beancount ledger support as a downloadable, read-only file-based driver. Transactions, postings (with resolved cost basis), accounts, prices, computed balances, and balance assertions project to SQL tables through user-provided `rledger` or Python Beancount, and BQL runs with a `BQL:` prefix when `rledger` is available. (#1474)
 - The Favorites sidebar **+** menu now includes **New Query**, which opens an empty SQL query tab.
+- Manage database users, roles, and privileges on MySQL and PostgreSQL connections. Open **View > Users & Roles** to see the accounts on the server, pick an object from the server down through databases, schemas, tables, and columns, and grant or revoke privileges on it. The privilege list shows where access actually comes from, including privileges inherited from a role or from a parent object. Changes are staged, undoable with ⌘Z, and shown as the exact SQL before they run. (#1413)
 
 ### Fixed
 

@@ -311,12 +311,33 @@ final class MainContentCommandActions {
     // MARK: - Unsaved Changes Check
 
     private var hasUnsavedChanges: Bool {
+        if isUsersRolesTab {
+            return coordinator?.usersRolesActions?.hasChanges() ?? false
+        }
         let hasEditedCells = coordinator?.changeManager.hasChanges ?? false
         let hasPendingTableOps = !pendingTruncates.wrappedValue.isEmpty
             || !pendingDeletes.wrappedValue.isEmpty
         let hasSidebarEdits = rightPanelState.editState.hasEdits
         let hasFileDirty = coordinator?.tabManager.selectedTab?.content.isFileDirty ?? false
         return hasEditedCells || hasPendingTableOps || hasSidebarEdits || hasFileDirty
+    }
+
+    private var isUsersRolesTab: Bool {
+        coordinator?.tabManager.selectedTab?.tabType == .usersRoles
+    }
+
+    var undoMenuTitle: String {
+        guard isUsersRolesTab, let actions = coordinator?.usersRolesActions, actions.canUndo() else {
+            return String(localized: "Undo")
+        }
+        return actions.undoMenuTitle()
+    }
+
+    var redoMenuTitle: String {
+        guard isUsersRolesTab, let actions = coordinator?.usersRolesActions, actions.canRedo() else {
+            return String(localized: "Redo")
+        }
+        return actions.redoMenuTitle()
     }
 
     // MARK: - Editor Query Loading (Group A — Called Directly)
@@ -410,6 +431,14 @@ final class MainContentCommandActions {
     private func saveAndClose() async {
         guard let coordinator = coordinator else {
             performClose()
+            return
+        }
+
+        // User and role changes can only be applied after the SQL is reviewed, so Save opens the
+        // review sheet and cancels the close. Falling through here would close the window and
+        // destroy every staged change.
+        if isUsersRolesTab, coordinator.usersRolesActions?.hasChanges() == true {
+            coordinator.usersRolesActions?.reviewAndApply()
             return
         }
 
@@ -559,6 +588,17 @@ final class MainContentCommandActions {
         return ServerDashboardQueryProviderFactory.provider(for: type) != nil
     }
 
+    func showUsersAndRoles() {
+        coordinator?.showUsersAndRoles()
+    }
+
+    var supportsUserManagement: Bool {
+        guard let connectionId = coordinator?.connectionId,
+              let adapter = DatabaseManager.shared.driver(for: connectionId) as? PluginDriverAdapter
+        else { return false }
+        return adapter.schemaPluginDriver.capabilities.contains(.userManagement)
+    }
+
     // MARK: - Tab Navigation (Group A — Called Directly)
 
     /// Selects the Nth native window tab. Wrapping the `selectedWindow`
@@ -593,6 +633,10 @@ final class MainContentCommandActions {
     // MARK: - Data Operations (Group A — Called Directly)
 
     func saveChanges() {
+        if isUsersRolesTab {
+            coordinator?.usersRolesActions?.reviewAndApply()
+            return
+        }
         if coordinator?.tabManager.selectedTab?.tabType == .createTable {
             coordinator?.createTableActions?.createTable?()
             return
@@ -868,6 +912,10 @@ final class MainContentCommandActions {
     // MARK: - Undo/Redo (Group A — Called Directly)
 
     func undoChange() {
+        if isUsersRolesTab {
+            coordinator?.usersRolesActions?.undo()
+            return
+        }
         if coordinator?.tabManager.selectedTab?.display.resultsViewMode == .structure {
             coordinator?.structureActions?.undo?()
             return
@@ -879,6 +927,10 @@ final class MainContentCommandActions {
     }
 
     func redoChange() {
+        if isUsersRolesTab {
+            coordinator?.usersRolesActions?.redo()
+            return
+        }
         if coordinator?.tabManager.selectedTab?.display.resultsViewMode == .structure {
             coordinator?.structureActions?.redo?()
             return
