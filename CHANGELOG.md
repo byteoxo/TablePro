@@ -7,31 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.57.0] - 2026-07-14
+
 ### Added
 
-- SurrealDB support as a downloadable driver for SurrealDB 2.x and 3.x. Browse namespaces and databases in the sidebar, run SurrealQL, and edit records in the grid. Record links, datetimes, durations, decimals, and UUIDs keep their types, and saving a cell writes only the field you changed. (#1862)
-- xAI (Grok) as an AI provider. Paste a key from the xAI Console to use Grok 4.5 or Grok 4.3 on API credits, or click **Sign in with xAI** to use a SuperGrok or X Premium+ subscription with no key. Supports reasoning effort and image attachments.
-- Connect to Google Cloud SQL through the Cloud SQL Auth Proxy without starting it yourself. Enable it on a MySQL, PostgreSQL, or SQL Server connection, set the instance connection name, and TablePro runs and stops the proxy with the connection. Supports Application Default Credentials, a service account key, and IAM database authentication, and can download the proxy or use one already on your Mac. (#1728)
-- Beancount ledger support as a downloadable, read-only file-based driver. Transactions, postings (with resolved cost basis), accounts, prices, computed balances, and balance assertions project to SQL tables through user-provided `rledger` or Python Beancount, and BQL runs with a `BQL:` prefix when `rledger` is available. (#1474)
-- The Favorites sidebar **+** menu now includes **New Query**, which opens an empty SQL query tab.
-- Manage database users, roles, and privileges on MySQL and PostgreSQL connections. Open **View > Users & Roles** to see the accounts on the server, pick an object from the server down through databases, schemas, tables, and columns, and grant or revoke privileges on it. The privilege list shows where access actually comes from, including privileges inherited from a role or from a parent object. Changes are staged, undoable with ⌘Z, and shown as the exact SQL before they run. (#1413)
-- Bring back a tab you closed by mistake with **File > Reopen Closed Tab** (`Cmd+Shift+T`), or pick an older one from **File > Recently Closed**. The last 20 closed query and table tabs are kept for 30 days, with their SQL, cursor position, and database context. (#1854)
-- Open a database from the terminal. Install a `tablepro` command from **Settings > General**, and run `ddev tablepro` in a DDEV project to open its database. A link to a database on your own machine can now be trusted with **Always Allow**, so it stops asking every time; review trusted links in **Settings > General**. (#1486)
+- SurrealDB 2.x and 3.x support as a downloadable driver. Browse namespaces and databases, run SurrealQL, and edit records in the grid. (#1862)
+- xAI (Grok) as an AI provider. Paste a key from the xAI Console, or sign in with a SuperGrok or X Premium+ subscription and use no key at all.
+- Google Cloud SQL connections through the Cloud SQL Auth Proxy. Turn it on for a MySQL, PostgreSQL, or SQL Server connection, set the instance connection name, and TablePro starts and stops the proxy for you. (#1728)
+- Beancount ledger support as a downloadable, read-only driver. Transactions, postings, accounts, prices, and balances read as SQL tables, and BQL runs with a `BQL:` prefix. (#1474)
+- **New Query** in the Favorites sidebar **+** menu, which opens an empty SQL query tab.
+- Database users, roles, and privileges on MySQL and PostgreSQL, under **View > Users & Roles**. Pick any object from the server down to a single column, see where each privilege comes from, and grant or revoke it. Changes are staged, undoable, and shown as SQL before they run. (#1413)
+- **File > Reopen Closed Tab** (`Cmd+Shift+T`) brings back the tab you just closed, and **File > Recently Closed** lists the last 20, kept for 30 days. (#1854)
+- Open a database from the terminal. Install the `tablepro` command from **Settings > General**, then run `ddev tablepro` in a DDEV project. Links to a database on your own Mac can be trusted with **Always Allow** and reviewed in **Settings > General**. (#1486)
 
 ### Changed
 
-- Query results now always show a result tab, so a single result can be pinned before the next query replaces it. Pinning was previously only reachable after running several statements at once. Pin from the tab's context menu or with `Cmd+Option+P`, and hover a tab to see the query that produced it. (#1855)
-- Closing a query tab no longer throws away the SQL in it. Every closed tab goes to **Recently Closed** instead, so closing stays quiet and stays undoable. The close button now also shows the unsaved dot for a query tab you have typed into, and a new tab no longer silently inherits the last closed tab's query. (#1854)
+- Query results always open in a result tab, so a single result can be pinned before the next query replaces it. Pin from the tab's context menu or with `Cmd+Option+P`. (#1855)
+- Closing a query tab keeps its SQL in **Recently Closed** instead of throwing it away, and the close button shows the unsaved dot for a query you typed into. (#1854)
 
 ### Fixed
 
-- Fixed a random crash when more than one table was open on the same connection. Queries running at the same time shared an unguarded type cache, which could corrupt memory and take the app down on a table switch, a reload, or when coming back to the app.
-- Column comments now show in the data grid header as soon as the table opens, instead of only after the query was run again. The header also grows to fit the comment line, so it is no longer cut off until a column is resized. (#1861)
-- **Size to Fit** and **Size All Columns to Fit** no longer stretch a column with long text far past the window. A fitted column now stops at half the visible grid, and every column has a maximum width, so a column left oversized before is brought back in range the next time you open the table.
-- The username is now optional. Leaving it empty, or importing a connection URL that has no user in it, no longer fills in `root`. An empty username lets the database use its own default, the same as `psql` and `mysql` do: your Mac login name on MySQL/MariaDB and PostgreSQL, and `default` on ClickHouse. The `~/.pgpass` lookup now matches on that same user.
+- Fixed a crash when several tables on the same connection ran queries at the same time.
+- Column comments now show in the data grid header as soon as the table opens, and the header grows to fit them. (#1861)
+- **Size to Fit** no longer stretches a column of long text past the window. Fitted columns stop at half the visible grid, and every column has a maximum width.
+- The username is now optional. Leaving it empty no longer fills in `root`, and lets the database pick its own default the way `psql` and `mysql` do.
 - A failed or cancelled connection that uses a Cloudflare tunnel no longer leaves the `cloudflared` process running in the background.
 - Pinned results are no longer discarded by **Clear Results**, and a tab holding one is no longer reused to browse a different table. (#1855)
-- Quitting now warns about unsaved changes in any tab, not just the visible one. Unsaved edits to a `.sql` file, table structure changes, and pending truncates and deletes were all missed before. (#1854)
+- Quitting now warns about unsaved changes in any tab, not just the visible one. (#1854)
 
 ## [0.56.2] - 2026-07-10
 
@@ -2510,7 +2512,8 @@ TablePro is a native macOS database client built with SwiftUI and AppKit, design
     - Custom SQL query templates
     - Performance optimized for large datasets
 
-[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.56.2...HEAD
+[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.57.0...HEAD
+[0.57.0]: https://github.com/TableProApp/TablePro/compare/v0.56.2...v0.57.0
 [0.56.2]: https://github.com/TableProApp/TablePro/compare/v0.56.1...v0.56.2
 [0.56.1]: https://github.com/TableProApp/TablePro/compare/v0.56.0...v0.56.1
 [0.56.0]: https://github.com/TableProApp/TablePro/compare/v0.55.0...v0.56.0
