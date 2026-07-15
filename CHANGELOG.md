@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.57.1] - 2026-07-15
+
 ### Added
 
 - SSH tunnels can now forward to a Unix socket on the remote server, for databases that only listen on a socket. Set the socket path on the General pane, and TablePro forwards to it instead of a host and port, through jump hosts if you use them. (#1871)
@@ -16,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed the right sidebar refusing to resize while a Users & Roles tab was open. The user list now collapses on its own when the tab gets too narrow to hold it. (#1872)
 - Fixed dividers that could not be dragged at all: the user list and privilege panes in Users & Roles, the trigger list in Structure, and the metrics and slow query panes in Server Dashboard. (#1872)
 - Cancel now stops a connection attempt right away instead of letting it run on in the background. A cancelled connection is also dropped from the last session, so restarting no longer reconnects to a host you gave up on, and it can no longer interrupt a later successful connection. (#1358)
-- Fixed a crash when clicking a column header on a table whose columns have comments. Sorting such a table quit the app immediately. (#1869)
+- Fixed a crash that could quit the app when opening or sorting a table whose columns have comments. (#1869, #1880)
 - MCP tools no longer stop working after the server sits idle for 15 minutes, or after the MCP server is restarted from Settings. TablePro's bridge now starts a new session by itself instead of reusing a dead one, so agents like Claude Code and Cursor keep working without being turned off and on again. (#1881)
 
 ### Security
@@ -2528,7 +2530,8 @@ TablePro is a native macOS database client built with SwiftUI and AppKit, design
     - Custom SQL query templates
     - Performance optimized for large datasets
 
-[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.57.0...HEAD
+[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.57.1...HEAD
+[0.57.1]: https://github.com/TableProApp/TablePro/compare/v0.57.0...v0.57.1
 [0.57.0]: https://github.com/TableProApp/TablePro/compare/v0.56.2...v0.57.0
 [0.56.2]: https://github.com/TableProApp/TablePro/compare/v0.56.1...v0.56.2
 [0.56.1]: https://github.com/TableProApp/TablePro/compare/v0.56.0...v0.56.1
