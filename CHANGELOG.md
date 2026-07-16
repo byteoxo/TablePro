@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Cancelling a SQL Server connection now stops waiting right away instead of staying stuck until the attempt finished on its own. A connection attempt also gives up after the login timeout with a clear message rather than hanging, and for Windows Authentication the message points at the usual Kerberos causes (KDC unreachable, missing SPN, or clock skew). (#1889)
 - Fixed MySQL and MariaDB queries ending in ORDER BY that could show an empty result with no error. A failure part way through reading rows was treated as a normal end of results, so a real server error looked like a table with no rows. TablePro now shows the error the server reported. (#1884)
 - Fixed the query result row cap returning a single row when it was set to unlimited. (#1884)
 - Fixed SSH tunnels that could accept a database connection and then go quiet instead of forwarding it or failing, which showed up as MySQL and MariaDB connections timing out while reading the server greeting. A tunnel that cannot open its forwarding channel now gives up after 10 seconds, closes the connection, and logs the reason, instead of leaving the driver to wait out its own timeout with no explanation. (#1883)
