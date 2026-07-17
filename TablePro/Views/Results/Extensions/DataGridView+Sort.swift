@@ -172,8 +172,7 @@ extension TableViewCoordinator {
                 let displaySubmenu = NSMenu()
                 let currentFormat = ValueDisplayFormatService.shared.effectiveFormat(
                     columnName: baseName,
-                    connectionId: connectionId,
-                    tableName: tableName
+                    scope: tableScope
                 )
                 for format in applicableFormats {
                     let item = NSMenuItem(
@@ -336,12 +335,11 @@ extension TableViewCoordinator {
 
         let formatToStore: ValueDisplayFormat? = (info.format == .raw) ? nil : info.format
 
-        if let connId = connectionId, let table = tableName {
+        if let scope = tableScope {
             ValueDisplayFormatService.shared.setOverride(
                 formatToStore,
                 columnName: info.columnName,
-                connectionId: connId,
-                tableName: table
+                scope: scope
             )
         }
 

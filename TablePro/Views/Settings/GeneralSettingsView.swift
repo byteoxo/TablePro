@@ -9,7 +9,6 @@ import SwiftUI
 struct GeneralSettingsView: View {
     @Binding var settings: GeneralSettings
     @Binding var tabSettings: TabSettings
-    @Binding var historySettings: HistorySettings
     var updaterBridge: UpdaterBridge
     var onResetAll: () -> Void
 
@@ -59,6 +58,9 @@ struct GeneralSettingsView: View {
                 Toggle("Show recent tables", isOn: $settings.showRecentTables)
                     .help("Adds a Recent section at the top of the Tables sidebar with the last tables you opened per connection and database.")
 
+                Toggle("Show object comments", isOn: $settings.showObjectComments)
+                    .help("Shows database object comments next to tables in the sidebar and in grid column headers.")
+
                 Picker("Default layout for new connections:", selection: $defaultSidebarLayout) {
                     Text("List").tag(SidebarLayout.flat)
                     Text("Tree").tag(SidebarLayout.tree)
@@ -75,8 +77,6 @@ struct GeneralSettingsView: View {
                 }
                 .help(String(localized: "Maximum time to wait for a query to complete. Set to 0 for no limit. Applied to new connections."))
             }
-
-            HistorySection(settings: $historySettings)
 
             CommandLineToolSection()
 
@@ -127,7 +127,6 @@ struct GeneralSettingsView: View {
     GeneralSettingsView(
         settings: .constant(.default),
         tabSettings: .constant(.default),
-        historySettings: .constant(.default),
         updaterBridge: UpdaterBridge.shared,
         onResetAll: {}
     )

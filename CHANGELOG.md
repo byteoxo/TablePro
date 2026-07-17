@@ -12,10 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Connect through a SOCKS5 proxy. Set a host, port, and an optional username and password on the connection form's new SOCKS Proxy pane, alongside SSH Tunnel, Cloudflare Tunnel, and Cloud SQL Auth Proxy. The database hostname is resolved by the proxy, so names that only resolve behind it work. (#1882)
 - SQL Server connections can now use Windows Authentication (Kerberos) on macOS. Pick Windows Authentication in the connection form to sign in with the Kerberos ticket you already have from `kinit`, or enter a Kerberos principal and password to sign in with your domain credentials. Connect by hostname, not IP address. (#1879)
 - Teradata support through a downloadable driver written in native Swift. Connect over TD2 or TDNEGO logon, optionally with TLS, browse databases, tables, and columns, run SQL, edit rows, and create or alter tables. (#1867)
+- The sidebar database tree now remembers which databases and schemas you had expanded, per connection, so reopening a window keeps them open.
+- A Saved Customizations section in Settings lists the tables where you set column layouts or filters, and lets you reset any one of them, or all.
+- Per-table column layouts (widths, order, and hidden columns) now sync across your Macs with iCloud when Settings sync is on.
 
 ### Changed
 
 - The query result row cap no longer adds a LIMIT to the SQL it sends. Your query now runs exactly as you wrote it and TablePro stops reading once it reaches the cap, which is how SQL Server and Oracle already worked. Adding a LIMIT could change how the server planned a query with an ORDER BY, and return different rows than the query you typed. (#1884)
+- The Settings window groups the data grid, pagination, result formatting, JSON viewer, query history, and saved per-table customizations under a new Data tab, and moves recent tables, object comments, and default sidebar layout under the General tab.
 
 ### Fixed
 
@@ -36,6 +40,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed the query result row cap returning a single row when it was set to unlimited. (#1884)
 - Fixed SSH tunnels that could accept a database connection and then go quiet instead of forwarding it or failing, which showed up as MySQL and MariaDB connections timing out while reading the server greeting. A tunnel that cannot open its forwarding channel now gives up after 10 seconds, closes the connection, and logs the reason, instead of leaving the driver to wait out its own timeout with no explanation. (#1883)
 - Fixed connections being reset when a single database session opened several at once through one SSH tunnel, which could happen while browsing schemas. (#1883)
+- Per-column display formats (Display As) are now kept per table, so two tables with the same name in different databases or schemas no longer share formatting.
+- Reopening a table now restores a saved filter's AND/OR match mode, instead of always resetting it to AND.
 
 ## [0.57.1] - 2026-07-15
 
