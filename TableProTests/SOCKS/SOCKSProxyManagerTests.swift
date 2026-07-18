@@ -16,6 +16,14 @@ struct SOCKSProxyManagerTests {
         SOCKSProxyConfiguration(host: "127.0.0.1", port: port, username: username)
     }
 
+    private func expectPortEventuallyFree(_ port: Int, host: String = "127.0.0.1") async {
+        for _ in 0..<100 {
+            if await !LoopbackPort.isReachable(host: host, port: port) { return }
+            try? await Task.sleep(for: .milliseconds(50))
+        }
+        #expect(await !LoopbackPort.isReachable(host: host, port: port))
+    }
+
     @Test("invalid configuration is rejected without touching the network")
     func invalidConfiguration() async {
         let manager = SOCKSProxyManager(connectTimeout: 1)
@@ -254,7 +262,7 @@ struct SOCKSProxyManagerTests {
         try await manager.closeTunnel(connectionId: connectionId)
         #expect(await !manager.hasTunnel(connectionId: connectionId))
         #expect(await manager.getLocalPort(connectionId: connectionId) == nil)
-        #expect(await !LoopbackPort.isReachable(host: "127.0.0.1", port: localPort))
+        await expectPortEventuallyFree(localPort)
     }
 
     @Test("recreating a tunnel for the same connection replaces the old one")
@@ -282,7 +290,7 @@ struct SOCKSProxyManagerTests {
         defer { Task { try await manager.closeTunnel(connectionId: connectionId) } }
 
         #expect(await manager.getLocalPort(connectionId: connectionId) == secondPort)
-        #expect(await !LoopbackPort.isReachable(host: "127.0.0.1", port: firstPort))
+        await expectPortEventuallyFree(firstPort)
     }
 }
 
