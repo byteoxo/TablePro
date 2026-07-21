@@ -7,24 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.59.0] - 2026-07-21
+
 ### Added
 
-- Trino support through a downloadable native Swift driver. Connect over the HTTP client protocol with a username and password or a JWT token, browse catalogs, schemas, tables, materialized views, and columns, run SQL and EXPLAIN, edit rows, and create or alter tables. TLS supports Verify CA and Verify Identity with a custom CA certificate, and client certificates for mutual TLS. Large exports stream page by page. (#1906)
-- SSH tunnels can authenticate with no password or key, for hosts that handle SSH auth themselves like Tailscale SSH. Pick **None** as the SSH auth method. (#1907)
-- SSH tunnels can complete keyboard-interactive verification, so servers that require a private key plus a one-time code (2FA through Google Authenticator or another PAM module) now connect. TablePro shows the server's prompt and you type the response. (#1920)
+- Trino support through a downloadable native Swift driver. Connect with a username and password or a JWT token, optionally over TLS with a custom CA or client certificate, browse catalogs, schemas, tables, and columns, run SQL, edit rows, and create or alter tables. (#1906)
+- SSH tunnels support **None** as an auth method, for hosts that handle SSH auth themselves like Tailscale SSH. (#1907)
+- SSH tunnels support keyboard-interactive 2FA, so a server that needs a private key plus a one-time code now connects. TablePro shows the prompt and you type the code. (#1920)
 
 ### Fixed
 
-- Copy as INSERT, UPDATE, JSON, CSV, or Markdown now includes only the columns you selected when you select specific cells. It used to include every column in the row. Copy as UPDATE still keys its WHERE clause on the primary key. (#1929)
-- Windows Authentication (Kerberos) to SQL Server now works on macOS. The bundled SQL Server driver was built without Kerberos support, so every Windows-auth connect failed as if the credentials were wrong. (#1918)
-- MySQL and MariaDB queries no longer fail after about a minute when a longer query timeout is set. The client read timeout now follows the configured query timeout, so a long query or stored procedure runs for the full time you allow. (#1921)
-- A dropped MySQL or MariaDB connection no longer silently re-runs a statement that changes data, so a lost connection can no longer run an insert, update, or stored procedure twice. (#1921)
+- Copy as INSERT, UPDATE, JSON, CSV, or Markdown now copies only the cells you selected, not the whole row. Copy as UPDATE still keys its WHERE clause on the primary key. (#1929)
+- Windows Authentication (Kerberos) to SQL Server now works on macOS. The bundled driver was built without Kerberos support, so every Windows-auth connect failed. (#1918)
+- MySQL and MariaDB queries no longer fail after about a minute when a longer query timeout is set. The client read timeout now follows the query timeout. (#1921)
+- A dropped MySQL or MariaDB connection no longer re-runs a statement that changes data, so a lost connection can't run an insert or update twice. (#1921)
 - The MongoDB, Oracle, Cassandra, and Elasticsearch plugins failed to install on 0.58 with "Bundle failed to load executable". (#1917)
-- Plugin install and load failures now name the real cause (wrong architecture, missing dependency, or incompatibility with this version of TablePro) instead of a generic error. A plugin that fails to load on demand is now reported instead of silently disappearing. (#1915)
+- Plugin install and load failures now name the real cause (wrong architecture, missing dependency, or version incompatibility) instead of a generic error. A plugin that fails to load on demand is reported instead of silently disappearing. (#1915)
 
 ### Changed
 
-- AI Chat renders Markdown while the assistant reply is still streaming, including open fenced code blocks, instead of waiting until the reply finishes.
+- AI Chat renders Markdown while the assistant reply streams, including open code blocks, instead of waiting for the reply to finish.
 
 ## [0.58.0] - 2026-07-18
 
@@ -2589,7 +2591,8 @@ TablePro is a native macOS database client built with SwiftUI and AppKit, design
     - Custom SQL query templates
     - Performance optimized for large datasets
 
-[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.58.0...HEAD
+[Unreleased]: https://github.com/TableProApp/TablePro/compare/v0.59.0...HEAD
+[0.59.0]: https://github.com/TableProApp/TablePro/compare/v0.58.0...v0.59.0
 [0.58.0]: https://github.com/TableProApp/TablePro/compare/v0.57.1...v0.58.0
 [0.57.1]: https://github.com/TableProApp/TablePro/compare/v0.57.0...v0.57.1
 [0.57.0]: https://github.com/TableProApp/TablePro/compare/v0.56.2...v0.57.0
