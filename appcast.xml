@@ -3,6 +3,63 @@
     <channel>
         <title>TablePro</title>
         <item>
+            <title>0.59.0</title>
+            <pubDate>Tue, 21 Jul 2026 12:11:30 +0000</pubDate>
+            <sparkle:version>111</sparkle:version>
+            <sparkle:shortVersionString>0.59.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <description><![CDATA[<h3>Added</h3>
+<ul>
+<li>Trino support through a downloadable native Swift driver. Connect with a username and password or a JWT token, optionally over TLS with a custom CA or client certificate, browse catalogs, schemas, tables, and columns, run SQL, edit rows, and create or alter tables. (#1906)</li>
+<li>SSH tunnels support **None** as an auth method, for hosts that handle SSH auth themselves like Tailscale SSH. (#1907)</li>
+<li>SSH tunnels support keyboard-interactive 2FA, so a server that needs a private key plus a one-time code now connects. TablePro shows the prompt and you type the code. (#1920)</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Copy as INSERT, UPDATE, JSON, CSV, or Markdown now copies only the cells you selected, not the whole row. Copy as UPDATE still keys its WHERE clause on the primary key. (#1929)</li>
+<li>Windows Authentication (Kerberos) to SQL Server now works on macOS. The bundled driver was built without Kerberos support, so every Windows-auth connect failed. (#1918)</li>
+<li>MySQL and MariaDB queries no longer fail after about a minute when a longer query timeout is set. The client read timeout now follows the query timeout. (#1921)</li>
+<li>A dropped MySQL or MariaDB connection no longer re-runs a statement that changes data, so a lost connection can't run an insert or update twice. (#1921)</li>
+<li>The MongoDB, Oracle, Cassandra, and Elasticsearch plugins failed to install on 0.58 with "Bundle failed to load executable". (#1917)</li>
+<li>Plugin install and load failures now name the real cause (wrong architecture, missing dependency, or version incompatibility) instead of a generic error. A plugin that fails to load on demand is reported instead of silently disappearing. (#1915)</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>AI Chat renders Markdown while the assistant reply streams, including open code blocks, instead of waiting for the reply to finish.</li>
+</ul>
+]]></description>
+            <enclosure url="https://github.com/TableProApp/TablePro/releases/download/v0.59.0/TablePro-0.59.0-arm64.zip" length="20606975" type="application/octet-stream" sparkle:edSignature="tu8lCVoC4T/mwTGbNORt+qZkdyeErOGHw2kG0CfKGBfWMJZImNXKkclwX6xygSGTGGnRfYymW/6yfKqQmORVDQ=="/>
+        </item>
+        <item>
+            <title>0.59.0</title>
+            <pubDate>Tue, 21 Jul 2026 12:11:30 +0000</pubDate>
+            <sparkle:version>111</sparkle:version>
+            <sparkle:shortVersionString>0.59.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h3>Added</h3>
+<ul>
+<li>Trino support through a downloadable native Swift driver. Connect with a username and password or a JWT token, optionally over TLS with a custom CA or client certificate, browse catalogs, schemas, tables, and columns, run SQL, edit rows, and create or alter tables. (#1906)</li>
+<li>SSH tunnels support **None** as an auth method, for hosts that handle SSH auth themselves like Tailscale SSH. (#1907)</li>
+<li>SSH tunnels support keyboard-interactive 2FA, so a server that needs a private key plus a one-time code now connects. TablePro shows the prompt and you type the code. (#1920)</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Copy as INSERT, UPDATE, JSON, CSV, or Markdown now copies only the cells you selected, not the whole row. Copy as UPDATE still keys its WHERE clause on the primary key. (#1929)</li>
+<li>Windows Authentication (Kerberos) to SQL Server now works on macOS. The bundled driver was built without Kerberos support, so every Windows-auth connect failed. (#1918)</li>
+<li>MySQL and MariaDB queries no longer fail after about a minute when a longer query timeout is set. The client read timeout now follows the query timeout. (#1921)</li>
+<li>A dropped MySQL or MariaDB connection no longer re-runs a statement that changes data, so a lost connection can't run an insert or update twice. (#1921)</li>
+<li>The MongoDB, Oracle, Cassandra, and Elasticsearch plugins failed to install on 0.58 with "Bundle failed to load executable". (#1917)</li>
+<li>Plugin install and load failures now name the real cause (wrong architecture, missing dependency, or version incompatibility) instead of a generic error. A plugin that fails to load on demand is reported instead of silently disappearing. (#1915)</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>AI Chat renders Markdown while the assistant reply streams, including open code blocks, instead of waiting for the reply to finish.</li>
+</ul>
+]]></description>
+            <enclosure url="https://github.com/TableProApp/TablePro/releases/download/v0.59.0/TablePro-0.59.0-x86_64.zip" length="21809729" type="application/octet-stream" sparkle:edSignature="+tewO2Pz3Zht/O3a5IPj61z3GumFZacUxcgwPz+z9nJS5Cayp+9qRchj6HgUs8bZXiE0flca9pr4RCPbjLJ/Cg=="/>
+        </item>
+        <item>
             <title>0.58.0</title>
             <pubDate>Sat, 18 Jul 2026 10:59:46 +0000</pubDate>
             <sparkle:version>110</sparkle:version>
