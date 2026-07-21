@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The MongoDB, Oracle, Cassandra, and Elasticsearch plugins failed to install on 0.58 with "Bundle failed to load executable". (#1917)
 - Plugin install and load failures now name the real cause (wrong architecture, missing dependency, or incompatibility with this version of TablePro) instead of a generic error. A plugin that fails to load on demand is now reported instead of silently disappearing. (#1915)
 
+### Changed
+
+- AI Chat renders Markdown while the assistant reply is still streaming, including open fenced code blocks, instead of waiting until the reply finishes.
+
 ## [0.58.0] - 2026-07-18
 
 ### Added
