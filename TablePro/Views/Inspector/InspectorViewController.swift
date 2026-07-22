@@ -271,39 +271,92 @@ final class InspectorViewController: NSViewController, NSUserInterfaceValidation
         }
     }
 
-    @objc func inspectorInsertColumnBefore(_ sender: Any?) {
-        guard let menuItem = sender as? NSMenuItem,
-              let inspector = inspectorDocument,
-              menuItem.tag >= 0, menuItem.tag < inspector.columnNames.count else { return }
-        let anchorIndex = menuItem.tag
+    @objc func inspectorInsertColumnLeft(_ sender: Any?) {
+        performInsertColumn(anchoredBy: sender, toRight: false)
+    }
+
+    @objc func inspectorInsertColumnRight(_ sender: Any?) {
+        performInsertColumn(anchoredBy: sender, toRight: true)
+    }
+
+    private func performInsertColumn(anchoredBy sender: Any?, toRight: Bool) {
+        guard let inspector = inspectorDocument,
+              let anchorIndex = columnInsertAnchor(from: sender, toRight: toRight) else { return }
         let anchorName = inspector.columnNames[anchorIndex]
+        let insertIndex = toRight ? anchorIndex + 1 : anchorIndex
         promptForColumnName(title: String(localized: "Insert Column"), initial: "") { [weak self] name in
             guard let self, let name, !name.isEmpty else { return }
-            self.inspectorDocument?.insertColumn(at: anchorIndex, name: name)
-            self.insertLayoutKey(name, relativeTo: anchorName, after: false)
+            self.inspectorDocument?.insertColumn(at: insertIndex, name: name)
+            self.insertLayoutKey(name, relativeTo: anchorName, after: toRight)
         }
     }
 
-    @objc func inspectorInsertColumnAfter(_ sender: Any?) {
-        guard let menuItem = sender as? NSMenuItem,
-              let inspector = inspectorDocument,
-              menuItem.tag >= 0, menuItem.tag < inspector.columnNames.count else { return }
-        let anchorIndex = menuItem.tag
-        let anchorName = inspector.columnNames[anchorIndex]
-        promptForColumnName(title: String(localized: "Insert Column"), initial: "") { [weak self] name in
-            guard let self, let name, !name.isEmpty else { return }
-            self.inspectorDocument?.insertColumn(at: anchorIndex + 1, name: name)
-            self.insertLayoutKey(name, relativeTo: anchorName, after: true)
-        }
+    private func columnInsertAnchor(from sender: Any?, toRight: Bool) -> Int? {
+        guard let inspector = inspectorDocument else { return nil }
+        let clicked = (sender as? NSMenuItem).map(\.tag)
+        return InspectorColumnTargets.insertAnchor(
+            clicked: clicked,
+            fullySelected: selectedFullColumns(),
+            columnCount: inspector.columnNames.count,
+            toRight: toRight
+        )
     }
 
     @objc func inspectorDeleteColumn(_ sender: Any?) {
-        guard let menuItem = sender as? NSMenuItem,
-              let inspector = inspectorDocument,
-              menuItem.tag >= 0, menuItem.tag < inspector.columnNames.count else { return }
-        let name = inspector.columnNames[menuItem.tag]
-        inspector.removeColumn(at: menuItem.tag)
-        removeLayoutKey(name)
+        let columns = columnDeleteTargets(from: sender)
+        performDeleteColumns(columns)
+    }
+
+    private func columnDeleteTargets(from sender: Any?) -> [Int] {
+        guard let inspector = inspectorDocument else { return [] }
+        return InspectorColumnTargets.deleteTargets(
+            explicit: (sender as? NSMenuItem)?.representedObject as? [Int],
+            fullySelected: selectedFullColumns(),
+            columnCount: inspector.columnNames.count
+        )
+    }
+
+    private func selectedFullColumns() -> IndexSet {
+        gridDelegate.coordinator?.selectionController.selectedFullColumns() ?? IndexSet()
+    }
+
+    private func performDeleteColumns(_ columns: [Int]) {
+        guard let inspector = inspectorDocument, !columns.isEmpty else { return }
+        let containsData = columnsContainData(columns, inspector: inspector)
+        InspectorDeleteConfirmation.confirmDeleteColumnsIfNeeded(
+            count: columns.count,
+            containsData: containsData,
+            window: view.window
+        ) { [weak self] in
+            self?.deleteColumns(columns)
+        }
+    }
+
+    private func deleteColumns(_ columns: [Int]) {
+        guard let inspector = inspectorDocument else { return }
+        let undoManager = nsDocument?.undoManager
+        undoManager?.beginUndoGrouping()
+        for column in columns.sorted(by: >) where column >= 0 && column < inspector.columnNames.count {
+            let name = inspector.columnNames[column]
+            inspector.removeColumn(at: column)
+            removeLayoutKey(name)
+        }
+        undoManager?.setActionName(
+            columns.count > 1 ? String(localized: "Delete Columns") : String(localized: "Delete Column")
+        )
+        undoManager?.endUndoGrouping()
+    }
+
+    private func columnsContainData(_ columns: [Int], inspector: any InspectorDocument) -> Bool {
+        let rowCount = inspector.rowCount
+        for column in columns {
+            var row = 0
+            while row < rowCount {
+                if !inspector.value(row: row, column: column).isEmpty { return true }
+                row += 1
+            }
+        }
+        return false
     }
 
     @objc func inspectorSetColumnType(_ sender: Any?) {
@@ -316,8 +369,13 @@ final class InspectorViewController: NSViewController, NSUserInterfaceValidation
         guard let inspector = inspectorDocument, index >= 0, index < inspector.columnNames.count else { return [] }
         return InspectorColumnMenuBuilder.structureItems(
             forColumn: index,
-            currentType: inspector.displayedType(forColumn: index)
+            currentType: inspector.displayedType(forColumn: index),
+            deleteColumns: columnDeleteSelection(clicked: index)
         )
+    }
+
+    private func columnDeleteSelection(clicked: Int) -> [Int] {
+        InspectorColumnTargets.deleteMenuSelection(clicked: clicked, fullySelected: selectedFullColumns())
     }
 
     fileprivate func rowStructureMenuItems(forRow displayRow: Int) -> [NSMenuItem] {
@@ -398,8 +456,13 @@ final class InspectorViewController: NSViewController, NSUserInterfaceValidation
             return nsDocument?.undoManager?.canRedo ?? false
         case #selector(saveDocument(_:)), #selector(saveDocumentAs(_:)),
              #selector(toggleInspectorFilter(_:)), #selector(inspectorAddRow(_:)),
-             #selector(inspectorInsertRowAbove(_:)), #selector(inspectorInsertRowBelow(_:)):
+             #selector(inspectorInsertRowAbove(_:)), #selector(inspectorInsertRowBelow(_:)),
+             #selector(inspectorInsertColumnLeft(_:)), #selector(inspectorInsertColumnRight(_:)):
             return nsDocument != nil
+        case #selector(inspectorDeleteColumn(_:)):
+            guard nsDocument != nil else { return false }
+            if let menuItem = item as? NSMenuItem, menuItem.representedObject is [Int] { return true }
+            return !selectedFullColumns().isEmpty
         case #selector(inspectorDeleteSelectedRows(_:)):
             return !state.selectedRowIndices.isEmpty
         default:
